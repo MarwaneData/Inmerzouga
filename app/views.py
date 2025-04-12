@@ -364,7 +364,7 @@ def contact_email(request):
 
         # Email settings
         from_email = 'noreplay.mtph@gmail.com'
-        to_email = ['marwane.mezzane.dev@gmail.com']
+        to_email = ['inmerzouga@gmail.com']
 
         try:
             # Send email
@@ -439,7 +439,7 @@ def contact_email2(request):
 
         # Email settings
         from_email = 'noreplay.mtph@gmail.com'
-        to_email = ['marwane.mezzane.dev@gmail.com']
+        to_email = ['inmerzouga@gmail.com']
 
         try:
             # Send email
@@ -523,7 +523,7 @@ def booking_email(request):
 
         # Email settings
         from_email = 'noreplay.mtph@gmail.com'
-        to_email = ['marwane.mezzane.dev@gmail.com']
+        to_email = ['inmerzouga@gmail.com']
 
         try:
             # Send email
