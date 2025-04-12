@@ -1,0 +1,126 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/events.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="events-hero">
+        <div class="hero-background">
+            <div class="slide active">
+                <img src="{{ page.hero_image_1.url }}" alt="Desert Events">
+            </div>
+            <div class="slide">
+                <img src="{{ page.hero_image_2.url }}" alt="Desert Wedding">
+            </div>
+            <div class="slide">
+                <img src="{{ page.hero_image_3.url }}" alt="Desert Photography">
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>{{ page.title }}</h1>
+            <p>{{ page.subtitle }}</p>
+        </div>
+        <div class="hero-scroll">
+            <div class="scroll-text">Discover More</div>
+            <div class="scroll-icon">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section class="events-section">
+        <div class="container">
+            <h2 class="section-title">Our Event Services</h2>
+            
+            {% for event in events %}
+            <div class="event-item" data-event-type="{{ event.type }}">
+                <div class="event-main">
+                    <div class="event-details">
+                        <h3>{{ event.title }}</h3>
+                        <div class="event-meta">
+                            <span><i class="fas fa-clock"></i> {{ event.duration }}</span>
+                            <span><i class="fas fa-users"></i> {{ event.group_size }}</span>
+                            <span><i class="fas fa-tag"></i> {{ event.price_info }} €</span>
+                        </div>
+                        <p class="event-description">{{ event.description }}</p>
+                        <div class="read-more-arrow" data-event="{{ event.id }}">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                    <div class="event-image">
+                        <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                    </div>
+                </div>
+                <div class="event-collapse">
+                    <div class="collapse-content">
+                        <div class="includes-section">
+                            <h4>What's Included</h4>
+                            <ul class="includes-list">
+                                {% for inclusion in event.includes.all %}
+                                <li><i class="{{ inclusion.icon }}"></i> {{ inclusion.title }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="pricing-section">
+                            <h4>Pricing</h4>
+                            <div class="price-grid">
+                                {% for price in event.get_prices_list %}
+                                <div class="price-item">
+                                    <span class="people">{{ price.people }}</span>
+                                    <span class="price">{{ price.price }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Client Gallery Section -->
+    <section class="client-gallery">
+        <div class="container">
+            <h2 class="section-title">Captured Moments</h2>
+            <p class="gallery-subtitle">Beautiful memories from our happy clients</p>
+            
+            <div class="gallery-grid">
+                {% for image in gallery_images %}
+                <div class="gallery-item">
+                    <img src="{{ image.image.url }}" alt="{{ image.category }}">
+                    <div class="gallery-overlay">
+                        <div class="overlay-content">
+                            <span class="location">{{ image.location }}</span>
+                            <span class="category">{{ image.category }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Details Modal -->
+    <div class="event-modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/events.js' %}"></script>
+{% endblock %} 

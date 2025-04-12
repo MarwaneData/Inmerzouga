@@ -1,0 +1,206 @@
+/* Featured Cities Section */
+.featured-cities {
+    padding: 5rem 0;
+    background: linear-gradient(to bottom right, #f8f9fa, #ffffff);
+    position: relative;
+}
+
+.featured-cities::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(0,0,0,0.1), transparent);
+}
+
+.featured-cities .section-title {
+    text-align: center;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 4rem;
+    color: var(--text-dark);
+    font-weight: 800;
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.featured-cities .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.cities-showcase {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.city-showcase-item {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+}
+
+.city-showcase-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.city-link {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.city-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+
+.city-showcase-item:hover img {
+    transform: scale(1.15);
+}
+
+.city-info {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.2) 0%,
+        rgba(0,0,0,0.6) 50%,
+        rgba(0,0,0,0.8) 100%
+    );
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 2rem;
+    color: var(--white);
+    transition: all 0.3s ease;
+}
+
+.city-info h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.city-info i {
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.4s ease;
+    background: var(--accent-color);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.city-showcase-item:hover .city-info {
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.3) 0%,
+        rgba(0,0,0,0.7) 50%,
+        rgba(0,0,0,0.9) 100%
+    );
+}
+
+.city-showcase-item:hover .city-info h3 {
+    transform: translateY(0);
+}
+
+.city-showcase-item:hover .city-info i {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+@media (max-width: 1200px) {
+    .cities-showcase {
+        gap: 1.5rem;
+        padding: 0 1.5rem;
+    }
+    
+    .city-info h3 {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .cities-showcase {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .featured-cities {
+        padding: 4rem 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .cities-showcase {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .city-showcase-item {
+        aspect-ratio: 16/9;
+    }
+    
+    .city-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .city-info i {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .featured-cities .section-title {
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+    }
+}
+
+/* Global Link Styles */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* If you want to be more specific for certain links */
+.container a,
+.section a,
+.nav-link,
+.footer a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Keep underline only for specific links if needed */
+.content-area a:not(.btn):not(.nav-link):not(.no-underline) {
+    text-decoration: underline;
+} 

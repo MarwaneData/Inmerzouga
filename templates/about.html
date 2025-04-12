@@ -1,0 +1,193 @@
+{% extends 'base-site.html' %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section class="about-hero">
+        <div class="hero-background">
+            <img src="{{ about.hero_image.url }}" alt="Desert Landscape">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>{{ about.hero_title }}</h1>
+            <p>{{ about.hero_subtitle }}</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <span class="highlight-tag">#1 Desert Tour Company</span>
+                    <h2>{{ about.about_title }}</h2>
+                    <p>{{ about.about_description }}</p>
+                    <div class="achievement-grid">
+                        <div class="achievement-item">
+                            <span class="number">{{ about.happy_travelers_count|floatformat:"0g" }}+</span>
+                            <span class="label">Happy Travelers</span>
+                        </div>
+                        <div class="achievement-item">
+                            <span class="number">{{ about.social_followers_count|floatformat:"0g" }}+</span>
+                            <span class="label">Social Followers</span>
+                        </div>
+                        <div class="achievement-item">
+                            <span class="number">#1</span>
+                            <span class="label">Desert Tour Company</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="{{ about.about_image.url }}" alt="Desert Experience">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="container">
+            <div class="video-content">
+                <h2>{{ about.video_section_title }}</h2>
+                <p>{{ about.video_section_description }}</p>
+                <div class="video-wrapper">
+                    <div class="video-thumbnail" id="video-container">
+                        <img src="{{ about.video_thumbnail.url }}" alt="Video Thumbnail" id="video-thumbnail">
+                        <button class="play-btn" onclick="playVideo()">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonials-grid">
+                {% for testimonial in testimonials %}
+                <div class="testimonial-card">
+                    <div class="testimonial-image">
+                        <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}">
+                    </div>
+                    <div class="rating">
+                        {% for i in ""|ljust:testimonial.rating %}
+                            <i class="fas fa-star"></i>
+                        {% endfor %}
+                    </div>
+                    <p class="testimonial-text">"{{ testimonial.content }}"</p>
+                    <div class="testimonial-author">
+                        <h4>{{ testimonial.name }}</h4>
+                        <span>{{ testimonial.country }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Travelers Gallery -->
+    <section class="travelers-gallery">
+        <div class="container">
+            <h2>Our Happy Travelers</h2>
+            <p class="gallery-subtitle">Capturing moments of joy and adventure in the Sahara</p>
+            
+            <div class="gallery-grid">
+                {% for image in gallery_images %}
+                <div class="gallery-item">
+                    <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                    <div class="gallery-overlay">
+                        <span class="location">{{ image.location }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function playVideo() {
+    const container = document.getElementById('video-container');
+    const thumbnail = document.getElementById('video-thumbnail');
+    const embedUrl = "{{ about.get_embed_url }}";
+    
+    // Create iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = embedUrl;
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    
+    // Replace thumbnail with iframe
+    container.innerHTML = '';
+    container.appendChild(iframe);
+}
+</script>
+
+<style>
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.video-thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.play-btn i {
+    color: white;
+    font-size: 30px;
+}
+
+.play-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
+</style>
+{% endblock %} 

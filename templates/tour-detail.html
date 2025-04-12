@@ -1,0 +1,511 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/tour-page.css' %}">
+<link rel="stylesheet" href="{% static 'css/itinerary-new.css' %}">
+<link rel="stylesheet" href="{% static 'css/whats-included.css' %}">
+<link rel="stylesheet" href="{% static 'css/not-included.css' %}">
+<link rel="stylesheet" href="{% static 'css/prices.css' %}">
+<link rel="stylesheet" href="{% static 'css/faq.css' %}">
+<link rel="stylesheet" href="{% static 'css/customer-photos.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Tour Header Section -->
+<section class="tour-header">
+    <div class="tour-header-image">
+        <img src="{{ tour.main_image.url }}" alt="{{ tour.title }}">
+    </div>
+    
+    <div class="container">
+        <div class="tour-header-content">
+            <h1 class="tour-title">{{ tour.title }}</h1>
+            
+            <p class="tour-description">{{ tour.description }}</p>
+
+            <!-- Booking Features -->
+            <div class="booking-features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h4>Low deposit from ${{ tour.low_deposit }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tour-info-grid">
+                <!-- Travel & Accommodation -->
+                <div class="info-block">
+                    <div class="info-header">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Travel & Accommodation</h3>
+                    </div>
+                    <ul class="info-list">
+                        <li>{{ tour.duration }} days, {{ tour.countries }} country</li>
+                        <li>Visit {{ tour.cities }} cities</li>
+                        <li>{{ tour.nights }} nights accommodation</li>
+                    </ul>
+                </div>
+
+                <!-- Meals -->
+                <div class="info-block">
+                    <div class="info-header">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Meals</h3>
+                    </div>
+                    <ul class="info-list">
+                        <li>{{ tour.breakfast_count }} Breakfasts</li>
+                        <li>{{ tour.lunch_count }} Lunches</li>
+                        <li>{{ tour.dinner_count }} Dinners</li>
+                    </ul>
+                </div>
+
+                <!-- Activity Level -->
+                <div class="info-block">
+                    <div class="info-header">
+                        <i class="fas fa-hiking"></i>
+                        <h3>Activity Level</h3>
+                    </div>
+                    <p class="activity-level">{{ tour.get_activity_level_display }}</p>
+                    <i class="fas fa-info-circle info-icon" title="{{ tour.activity_description }}"></i>
+                </div>
+
+                <!-- Itinerary -->
+                <div class="info-block">
+                    <div class="info-header">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Itinerary</h3>
+                    </div>
+                    <a href="#day-by-day" class="view-itinerary">View day-by-day trip itinerary</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map & Itinerary Section -->
+<section class="map-itinerary">
+    <div class="container">
+        <h2 class="section-title">Trip map & itinerary</h2>
+        
+        <div class="map-content-grid">
+            <!-- Left side - Content -->
+            <div class="itinerary-content">
+                {% for day in day_overviews %}
+                <div class="day-item">
+                    <span class="day-number">Day {{ day.day_number }}</span>
+                    <h3>{{ day.title }}</h3>
+                    <p>{{ day.description }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Right side - Map -->
+            <div class="map-container">
+                <div class="map-controls">
+                    <button class="zoom-btn" id="zoomIn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="zoom-btn" id="zoomOut">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="zoom-btn" id="fullscreen">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+                <div class="map-wrapper" id="mapWrapper">
+                    <img src="{{ tour.map_image.url }}" alt="Trip Map" id="mapImage">
+                </div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <span class="legend-icon start"></span>
+                        <span>Start Location</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon end"></span>
+                        <span>End Location</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon overnight"></span>
+                        <span>Over night</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-icon visited"></span>
+                        <span>Visited Location</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Day by Day Itinerary Section -->
+    <section class="itinerary-section" id="day-by-day">
+        <div class="container">
+            <div class="itinerary-header">
+                <h2 class="itinerary-title">Day by day itinerary</h2>
+                <p class="itinerary-subtitle">{{ tour.duration }} days itinerary trip visiting {{ tour.cities }} cities</p>
+                <button class="collapse-all">
+                    Collapse all days
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <div class="day-cards">
+                {% for day in days %}
+                <div class="itinerary-item">
+                    <div class="item-preview">
+                        <div class="item-image">
+                            <img src="{{ day.image.url }}" alt="{{ day.title }}">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-day">Day {{ day.day_number }}</div>
+                            <h3>{{ day.title }}</h3>
+                            <div class="item-location">{{ day.location }}</div>
+                            {% if day.is_welcome_day %}
+                            <div class="item-welcome">
+                                <i class="fas fa-users"></i>
+                                Welcome
+                            </div>
+                            {% endif %}
+                        </div>
+                        <button class="item-toggle">
+                            <span>See more</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="item-expanded">
+                        <div class="expanded-content">
+                            <h3>{{ day.title }}</h3>
+                            <p class="expanded-description">{{ day.description|linebreaks }}</p>
+                            <div class="expanded-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-bed"></i>
+                                    <div class="detail-content">
+                                        <h4>Accommodation</h4>
+                                        <div class="accommodation-list">
+                                            <p>
+                                                {% if day.hotel_link %}
+                                                <a href="{{ day.hotel_link }}" class="accommodation-link" target="_blank">
+                                                    {{ day.hotel_name }} <i class="fas fa-external-link-alt"></i>
+                                                </a>
+                                                {% else %}
+                                                    {{ day.hotel_name }}
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-utensils"></i>
+                                    <div class="detail-content">
+                                        <h4>Included Meals</h4>
+                                        <div class="meals-list">
+                                            {% if day.breakfast %}
+                                            <p>Breakfast</p>
+                                            {% endif %}
+                                            {% if day.lunch %}
+                                            <p>Lunch</p>
+                                            {% endif %}
+                                            {% if day.dinner %}
+                                            <p>Dinner</p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if day.activities.all %}
+                                <div class="detail-item">
+                                    <i class="fas fa-hiking"></i>
+                                    <div class="detail-content">
+                                        <h4>Activities</h4>
+                                        <div class="activities-list">
+                                            {% for activity in day.activities.all %}
+                                            <p>{{ activity.name }}</p>
+                                            {% endfor %}
+                                    </div>
+                                </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="expanded-image">
+                            <img src="{{ day.image.url }}" alt="{{ day.title }}">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights-section">
+        <div class="container">
+            <h2 class="section-title">About this trip</h2>
+            
+            <h3 class="highlights-subtitle">Sightseeing highlights</h3>
+            
+            <div class="highlights-grid">
+                {% for highlight in highlights %}
+                <div class="highlight-item">
+                        <i class="{{ highlight.icon }}"></i>
+                    <div class="highlight-content">
+                        <span class="highlight-label">{{ highlight.get_highlight_type_display }}</span>
+                        <p>{{ highlight.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included Section -->
+    <section class="whats-included-section">
+        <div class="container">
+            <div class="included-header">
+                <h2 class="section-title">What's Included</h2>
+                <button class="expand-all-included">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="included-items">
+                {% regroup inclusions by get_inclusion_type_display as inclusion_list %}
+                {% for type in inclusion_list %}
+                <div class="included-item">
+                    <div class="included-item-header">
+                        <div class="item-icon">
+                            <i class="{{ type.list.0.icon }}"></i>
+                        </div>
+                        <h3>{{ type.grouper }}</h3>
+                        <button class="toggle-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="included-content">
+                        <ul class="included-list">
+                            {% for item in type.list %}
+                                {% for description_item in item.description_list %}
+                                <li>{{ description_item }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Not Included Section -->
+    <section class="not-included-section">
+        <div class="container">
+            <div class="not-included-header">
+                <h2 class="section-title">What's Not Included</h2>
+                <button class="expand-all-not-included">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="not-included-items">
+                {% for exclusion in exclusions %}
+                <div class="not-included-item">
+                    <div class="not-included-item-header">
+                        <div class="item-icon">
+                            <i class="{{ exclusion.icon }}"></i>
+                        </div>
+                        <h3>{{ exclusion.title }}</h3>
+                        <button class="toggle-not-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="not-included-content">
+                        <ul class="included-list">
+                            {% for line in exclusion.description.splitlines %}
+                                {% if line %}
+                                <li>{{ line }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Extra Activities Section -->
+    <section class="whats-included-section">
+        <div class="container">
+            <div class="included-header">
+                <h2 class="section-title">Extra Activities</h2>
+                <button class="expand-all-included plus">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="included-items">
+                {% if extra_activities %}
+                    {% for activity in extra_activities %}
+                    <div class="included-item extra">
+                        <div class="included-item-header">
+                            <div class="item-icon">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <h3>{{ activity.title }}</h3>
+                            <button class="toggle-included">
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                        </div>
+                        <div class="included-content">
+                            <ul class="included-list">
+                                {% for line in activity.description.splitlines %}
+                                    {% if line %}
+                                    <li>{{ line }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No extra activities available for this tour.</p>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Prices Section -->
+    <section class="prices-section">
+        <div class="container">
+            <div class="prices-header">
+                <h2 class="section-title">Tour Prices</h2>
+                <button class="expand-all-prices">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <p class="prices-intro">
+                Since trip charges vary depending on the number of travelers, we offer different pricing options to ensure comfort and value for every group size. All prices are per person and include all mentioned services above.
+            </p>
+            
+            <div class="prices-items">
+                {% for price in tour.prices.all %}
+                <div class="price-item">
+                    <div class="price-item-header">
+                        <div class="item-icon">
+                            <i class="{{ price.icon_class }}"></i>
+                        </div>
+                        <h3>{{ price.title }}</h3>
+                        <div class="price-tag">{{ price.price }}€{% if price.per_person %}<span>/person</span>{% endif %}</div>
+                        <button class="toggle-price">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="price-content">
+                        <div class="price-details">
+                            <ul class="price-benefits">
+                                {% for benefit in price.benefits.splitlines %}
+                                    {% if benefit %}
+                                    <li>{{ benefit }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="price-notes">
+                <p><i class="fas fa-info-circle"></i> Prices are in Euros. Other currencies are accepted at the daily exchange rate.</p>
+                <p><i class="fas fa-calendar-alt"></i> High season supplement may apply during peak travel periods.</p>
+                <p><i class="fas fa-child"></i> Children under 12 years receive a {{ tour.child_discount }}% discount when sharing with adults.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="section-title">Frequently asked questions</h2>
+                <button class="expand-all-faq">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="faq-items">
+                {% for faq in faqs %}
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>{{ faq.question }}</h3>
+                        <button class="toggle-faq">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        {% for line in faq.answer.splitlines %}
+                            {% if line %}
+                            <p>{{ line }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Customer Photos Section -->
+    <section class="customer-photos">
+        <div class="container">
+            <h2 class="section-title">Customer Photos</h2>
+            
+            <div class="photo-slider">
+                <button class="slider-nav prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="slider-container">
+                    <div class="slider-track">
+                        {% for photo in customer_photos %}
+                        <div class="slide">
+                            <img src="{{ photo.image.url }}" alt="{{ photo.caption }}">
+                </div>
+                {% endfor %}
+                    </div>
+                </div>
+
+                <button class="slider-nav next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/itinerary.js' %}"></script>
+<script src="{% static 'js/whats-included.js' %}"></script>
+<script src="{% static 'js/not-included.js' %}"></script>
+<script src="{% static 'js/prices.js' %}"></script>
+<script src="{% static 'js/faq.js' %}"></script>
+<script src="{% static 'js/customer-photos.js' %}"></script>
+<script src="{% static 'js/map.js' %}"></script>
+{% endblock %}
+

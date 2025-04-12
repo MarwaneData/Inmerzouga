@@ -1,0 +1,265 @@
+.prices-section {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.prices-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    max-width: 1200px;
+    margin: 0 auto 24px;
+    padding: 0 20px;
+}
+
+.prices-intro {
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    padding: 0 20px;
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.expand-all-prices {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2c5a7b;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.expand-all-prices:hover {
+    background: rgba(44, 90, 123, 0.1);
+}
+
+.expand-all-prices i {
+    transition: transform 0.3s ease;
+}
+
+.expand-all-prices.expanded i {
+    transform: rotate(180deg);
+}
+
+.prices-items {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.price-item {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.price-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.price-item-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.price-item-header .item-icon {
+    width: 40px;
+    height: 40px;
+    background: #f0f7ff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.price-item-header .item-icon i {
+    font-size: 20px;
+    color: #2c5a7b;
+}
+
+.price-item-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    flex: 1;
+}
+
+.price-tag {
+    font-size: 24px;
+    font-weight: 700;
+    color: #2c5a7b;
+    margin-right: 16px;
+}
+
+.price-tag span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+}
+
+.toggle-price {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.toggle-price i {
+    color: #2c5a7b;
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.price-item.expanded .toggle-price i {
+    transform: rotate(180deg);
+}
+
+.price-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: #f8f9fa;
+}
+
+.price-item.expanded .price-content {
+    max-height: 500px;
+}
+
+.price-details {
+    padding: 24px;
+}
+
+.price-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+}
+
+.price-benefits li {
+    position: relative;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    color: #666;
+    font-size: 16px;
+}
+
+.price-benefits li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #4a7140;
+    font-weight: 600;
+}
+
+.book-now-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #2c5a7b;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background 0.3s ease;
+}
+
+.book-now-btn:hover {
+    background: #234861;
+}
+
+.price-notes {
+    max-width: 1200px;
+    margin: 32px auto 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.price-notes p {
+    margin: 0 0 8px 0;
+    color: #666;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price-notes p:last-child {
+    margin-bottom: 0;
+}
+
+.price-notes i {
+    color: #2c5a7b;
+}
+
+/* Responsive Styles */
+@media (max-width: 1170px) {
+    .prices-header,
+    .prices-intro,
+    .prices-items,
+    .price-notes {
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .prices-section {
+        padding: 40px 0;
+    }
+
+    .prices-header,
+    .prices-intro,
+    .prices-items,
+    .price-notes {
+        padding: 0 16px;
+    }
+
+    .price-item-header {
+        padding: 16px;
+    }
+
+    .price-item-header .item-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .price-item-header .item-icon i {
+        font-size: 16px;
+    }
+
+    .price-item-header h3 {
+        font-size: 16px;
+    }
+
+    .price-tag {
+        font-size: 20px;
+    }
+
+    .price-details {
+        padding: 16px;
+    }
+
+    .price-benefits li {
+        font-size: 14px;
+    }
+} 

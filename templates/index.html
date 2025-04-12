@@ -1,0 +1,330 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/reviews.css' %}">
+<link rel="stylesheet" href="{% static 'css/tourslide.css' %}">
+<link rel="stylesheet" href="{% static 'css/cities.css' %}">
+<link rel="stylesheet" href="{% static 'css/daytrips.css' %}">
+<link rel="stylesheet" href="{% static 'css/photography.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/things.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<header class="hero">
+    <div class="hero-background">
+        <img src="{{ home_page.hero_image.url }}" alt="Morocco Landscape" class="hero-img">
+        <div class="hero-overlay"></div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <h1>{{ home_page.hero_title }}</h1>
+            <p class="hero-subtitle">{{ home_page.hero_subtitle }}</p>
+            <div class="hero-rating">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="hero-rating-text">{{ home_page.hero_rating }}/5 from our travelers</span>
+            </div>
+            <a href="#tour" class="hero-cta">{{ home_page.hero_button_text }}</a>
+        </div>
+    </div>
+</header>
+
+<!-- Popular Tours Section -->
+<section class="tours-section" id="tour">
+    <div class="container">
+        <h2 class="section-title">Popular Morocco Tours</h2>
+        <div class="tours-grid">
+            {% for tour in popular_tours %}
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="{{ tour.main_image.url }}" alt="{{ tour.title }}">
+                    <button class="quick-view">Quick View</button>
+                </div>
+                <div class="tour-content">
+                    <div class="tour-rating">
+                        <div class="stars" style="font-size: 16px;">
+                            {% if forloop.counter == 1 %}
+                            <!-- First tour: 4.9 stars -->
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="font-size: 15px;">4.9</span>
+                            {% elif forloop.counter == 2 %}
+                            <!-- Second tour: 4.6 stars -->
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="font-size: 15px;">4.6</span>
+                            {% else %}
+                            <!-- Third tour: 4.8 stars -->
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span style="font-size: 15px;">4.8</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <h3>{{ tour.title }}</h3>
+                    <div class="tour-meta">
+                        <span><i class="far fa-calendar"></i> {{ tour.duration }} Days</span>
+                        <span><i class="fas fa-map-marker-alt"></i> {{ tour.cities }} Cities</span>
+                        <span><i class="fas fa-flag"></i> Morocco</span>
+                    </div>
+                    <p class="tour-description">
+                        {{ tour.description|truncatewords:20 }}
+                    </p>
+                    <div class="tour-footer">
+                        <div class="tour-price">
+                            <span>FROM</span>
+                            <strong>${{ tour.price_from }}</strong>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="{% url 'tour_detail' tour.slug %}" class="btn-view">View Trip</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Popular Day Trips Section -->
+<section class="day-trips-section">
+    <div class="container">
+        <h2 class="section-title">Popular Day Trips</h2>
+        <div class="tours-grid">
+            {% for daytrip in popular_daytrips %}
+            <div class="tour-card">
+                <div class="tour-image">
+                    <img src="{{ daytrip.main_image.url }}" alt="{{ daytrip.title }}">
+                    <button class="quick-view">Quick View</button>
+                </div>
+                <div class="tour-content">
+                    <div class="tour-rating">
+                        <div class="stars" style="font-size: 16px;">
+                            {% if forloop.counter == 1 %}
+                            <!-- 4.4 stars -->
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="font-size: 15px;">4.4</span>
+                            {% elif forloop.counter == 2 %}
+                            <!-- 4.2 stars -->
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span style="font-size: 15px;">4.2</span>
+                            {% else %}
+                            <!-- 4.3 stars -->
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span style="font-size: 15px;">4.3</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <h3>{{ daytrip.title }}</h3>
+                    <div class="tour-meta">
+                        <span><i class="far fa-clock"></i> {{ daytrip.duration_hours }} Hours</span>
+                        <span><i class="fas fa-map-marker-alt"></i> {{ daytrip.city }}</span>
+                        <span><i class="fas fa-users"></i> Max {{ daytrip.max_persons }}</span>
+                    </div>
+                    <p class="tour-description">
+                        {{ daytrip.description|truncatewords:20 }}
+                    </p>
+                    <div class="tour-footer">
+                        <div class="tour-price">
+                            <span>FROM</span>
+                            <strong>${{ daytrip.price_from }}</strong>
+                        </div>
+                        <div class="tour-actions">
+                            <a href="{% url 'daytrip_detail' daytrip.slug %}" class="btn-view">View Trip</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Cities Section -->
+<section class="featured-cities">
+    <div class="container">
+        <h2 class="section-title">Our Morocco Destinations</h2>
+        <div class="cities-showcase">
+            {% for city in cities %}
+            <div class="city-showcase-item">
+                <a href="{% url 'city_detail' city.slug %}" class="city-link">
+                    <img src="{{ city.hero_image.url }}" alt="{{ city.title }}">
+                    <div class="city-info">
+                        <h3>{{ city.title }}</h3>
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Photography Packages Section -->
+<section class="photography-section">
+    <div class="container">
+        <h2 class="section-title">Photography Packages</h2>
+        <div class="photography-grid">
+            {% for package in packages %}
+            <div class="photo-package-card">
+                <div class="package-image">
+                    <img src="{{ package.image.url }}" alt="{{ package.title }}">
+                    <div class="package-label">{{ package.package_type }}</div>
+                </div>
+                <div class="package-content">
+                    <h3>{{ package.title }}</h3>
+                    <div class="package-features">
+                        <div class="feature">
+                            <i class="fas fa-image"></i>
+                            <span>{{ package.photo_count }} Correcting Color images</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>{{ package.editing_hours }} Duration</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-magic"></i>
+                            <span>{{ package.retouches }} Retouches</span>
+                        </div>
+                        {% if package.digital_delivery %}
+                        <div class="feature">
+                            <i class="fas fa-cloud-download-alt"></i>
+                            <span>Digital Delivery</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="package-pricing">
+                        <div class="old-price">${{ package.price }}</div>
+                        <div class="current-price">${{ package.price }}</div>
+                    </div>
+                    <button class="package-btn">Book Now</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Things to Do Section -->
+<section class="things-section">
+    <div class="things-background"></div>
+    <div class="container">
+        <h2 class="things-title">Our top 5 things to do in Morocco</h2>
+        <p class="things-subtitle">Discover the best experiences Morocco has to offer</p>
+        
+        <div class="things-swiper-container">
+            <div class="swiper things-do-swiper">
+                <div class="swiper-wrapper">
+                    {% for item in things_to_do %}
+                    <div class="swiper-slide">
+                        <div class="thing-card">
+                            <h3>{{ item.title }}</h3>
+                            <p>{{ item.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Museums Section -->
+<section class="things-section museums">
+    <div class="things-background"></div>
+    <div class="container">
+        <h2 class="things-title">Best museums in Morocco</h2>
+        <p class="things-subtitle">Explore Morocco's rich cultural heritage</p>
+        
+        <div class="things-swiper-container">
+            <div class="swiper museums-swiper">
+                <div class="swiper-wrapper">
+                    {% for museum in museums %}
+                    <div class="swiper-slide">
+                        <div class="thing-card">
+                            <h3 style="color: #503454;">{{ museum.title }}</h3>
+                            <p>{{ museum.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Food Section -->
+<section class="things-section food">
+    <div class="things-background"></div>
+    <div class="container">
+        <h2 class="things-title">Best Food in Morocco</h2>
+        <p class="things-subtitle">Taste the flavors of Morocco</p>
+        
+        <div class="things-swiper-container">
+            <div class="swiper food-swiper">
+                <div class="swiper-wrapper">
+                    {% for food in foods %}
+                    <div class="swiper-slide">
+                        <div class="thing-card">
+                            <h3 style="color: #2c5a7b;">{{ food.title }}</h3>
+                            <p>{{ food.description }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="{% static 'js/swiper-init.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+{% endblock %}

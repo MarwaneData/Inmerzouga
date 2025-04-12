@@ -1,0 +1,324 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/luxury-camp.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/tour-page.css' %}">
+<link rel="stylesheet" href="{% static 'css/whats-included.css' %}">
+<link rel="stylesheet" href="{% static 'css/not-included.css' %}">
+<link rel="stylesheet" href="{% static 'css/prices.css' %}">
+<link rel="stylesheet" href="{% static 'css/faq.css' %}">
+<link rel="stylesheet" href="{% static 'css/customer-photos.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <header class="luxury-hero">
+        <div class="hero-background">
+            <img src="{{ camp.hero_image.url }}" alt="{{ camp.title }}" class="hero-img">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>{{ camp.title }}<span style="font-size: 20px; font-weight: 600;"> <br> {{ camp.subtitle }}</span></h1>
+            
+                <div class="hero-features">
+                    <div class="feature">
+                        <i class="{{ camp.hero_feature_1_icon }}"></i>
+                        <span>{{ camp.hero_feature_1_text }}</span>
+                    </div>
+                    <div class="feature">
+                        <i class="{{ camp.hero_feature_2_icon }}"></i>
+                        <span>{{ camp.hero_feature_2_text }}</span>
+                    </div>
+                    <div class="feature">
+                        <i class="{{ camp.hero_feature_3_icon }}"></i>
+                        <span>{{ camp.hero_feature_3_text }}</span>
+                    </div>
+                </div>
+                <a href="#one-night" class="hero-cta">Explore Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- One Night Luxury Section -->
+
+     
+    <section id="one-night" class="one-night-luxury">
+        <div class="container">
+            <div class="luxury-grid">
+                <div class="luxury-content">
+                    <h2 class="section-title">{{ camp.title }}</h2>
+                    <p class="luxury-description">{{ camp.description }}</p>
+                    
+                    <div class="luxury-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="highlight-content">
+                                <h3>Duration</h3>
+                                <p>{{ camp.duration }}</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <div class="highlight-content">
+                                <h3>Group Size</h3>
+                                <p>{{ camp.group_size }}</p>
+                            </div>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-utensils"></i>
+                            <div class="highlight-content">
+                                <h3>Meals</h3>
+                                <p>{{ camp.meals_included }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="experience-includes">
+                        <h3>Camp Experience</h3>
+                        <ul class="includes-list">
+                            {% for experience in camp.experiences.all %}
+                            <li><i class="{{ experience.icon }}"></i> {{ experience.title }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="luxury-images">
+                    <div class="image-grid">
+                        <img src="{{ camp.main_section_image.url }}" alt="{{ camp.main_section_image_caption }}" class="main-image">
+                        <div class="small-images">
+                            <img src="{{ camp.section_image_1.url }}" alt="{{ camp.section_image_1_caption }}">
+                            <img src="{{ camp.section_image_2.url }}" alt="{{ camp.section_image_2_caption }}">
+                            <img src="{{ camp.section_image_3.url }}" alt="{{ camp.section_image_3_caption }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included Section -->
+    <section class="whats-included-section">
+        <div class="container">
+            <div class="included-header">
+                <h2 class="section-title">What's Included</h2>
+                <button class="expand-all-included">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="included-items">
+                {% for inclusion in inclusions %}
+                <div class="included-item">
+                    <div class="included-item-header">
+                        <div class="item-icon">
+                            <i class="{{ inclusion.icon }}"></i>
+                        </div>
+                        <h3>{{ inclusion.title }}</h3>
+                        <button class="toggle-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="included-content">
+                        <ul class="included-list">
+                            {% for item in inclusion.description_list %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Not Included Section -->
+    <section class="not-included-section">
+        <div class="container">
+            <div class="not-included-header">
+                <h2 class="section-title">What's Not Included</h2>
+                <button class="expand-all-not-included">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="not-included-items">
+                {% for exclusion in exclusions %}
+                <div class="not-included-item">
+                    <div class="not-included-item-header">
+                        <div class="item-icon">
+                            <i class="{{ exclusion.icon }}"></i>
+                        </div>
+                        <h3>{{ exclusion.title }}</h3>
+                        <button class="toggle-not-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="not-included-content">
+                        <ul class="included-list">
+                            {% for item in exclusion.description_list %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Extra Activities Section -->
+    <section class="whats-included-section">
+        <div class="container">
+            <div class="included-header">
+                <h2 class="section-title">Extra Activities</h2>
+                <button class="expand-all-included plus">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="included-items">
+                {% for activity in activities %}
+                <div class="included-item extra">
+                    <div class="included-item-header">
+                        <div class="item-icon">
+                            <i class="{{ activity.icon }}"></i>
+                        </div>
+                        <h3>{{ activity.title }}</h3>
+                        <button class="toggle-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="included-content">
+                        <ul class="included-list">
+                            {% for item in activity.description_list %}
+                            <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Prices Section -->
+    <section class="prices-section">
+        <div class="container">
+            <div class="prices-header">
+                <h2 class="section-title">Camp Prices</h2>
+                <button class="expand-all-prices">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <p class="prices-intro">
+                Our luxury camp offers different pricing options based on tent occupancy and group size. All prices include the full desert experience with accommodation, meals, activities, and local transfers.
+            </p>
+            
+            <div class="prices-items">
+                {% for price in prices %}
+                <div class="price-item">
+                    <div class="price-item-header">
+                        <div class="item-icon">
+                            <i class="{{ price.icon }}"></i>
+                        </div>
+                        <h3>{{ price.title }}</h3>
+                        <div class="price-tag">{{ price.price }}€<span>{% if price.per_night %}/night{% endif %}</span></div>
+                        <button class="toggle-price">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="price-content">
+                        <div class="price-details">
+                            <ul class="price-benefits">
+                                {% for benefit in price.benefits_list %}
+                                <li>{{ benefit }}</li>
+                                {% endfor %}
+                            </ul>
+                            <a href="{% url 'book_now' %}" class="book-now-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="price-notes">
+                <p><i class="fas fa-info-circle"></i> Prices are in Euros and include all taxes and fees.</p>
+                <p><i class="fas fa-calendar-alt"></i> Peak season rates may apply from October to March.</p>
+                <p><i class="fas fa-child"></i> Children under 6 years stay free when sharing parents' tent.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="section-title">Frequently asked questions</h2>
+                <button class="expand-all-faq">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="faq-items">
+                {% for faq in faqs %}
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>{{ faq.question }}</h3>
+                        <button class="toggle-faq">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>{{ faq.answer }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="customer-photos"></section>
+        <div class="container">
+            <h2 class="section-title">Customer Photos</h2>
+            
+            <div class="photo-slider">
+                <button class="slider-nav prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="slider-container">
+                    <div class="slider-track">
+                        {% for photo in photos %}
+                        <div class="slide">
+                            <img src="{{ photo.image.url }}" alt="{{ photo.caption }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <button class="slider-nav next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/whats-included.js' %}"></script>
+<script src="{% static 'js/not-included.js' %}"></script>
+<script src="{% static 'js/prices.js' %}"></script>
+<script src="{% static 'js/faq.js' %}"></script>
+<script src="{% static 'js/customer-photos.js' %}"></script>
+{% endblock %} 

@@ -1,0 +1,33 @@
+/* Custom Admin Styles */
+#header {
+    background: #2c3e50;  /* Dark blue color */
+    color: #fff;
+}
+
+#header a:link, #header a:visited {
+    color: #fff;
+}
+
+/* Style for the user tools section */
+#user-tools {
+    color: #ecf0f1;
+}
+
+#user-tools a {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#user-tools a:hover {
+    color: #fff;
+    border-bottom-color: #fff;
+    text-decoration: none;
+}
+
+/* Branding section */
+#branding h1 {
+    color: #fff;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    background: #34495e;  /* Slightly lighter blue for module headers */
+} 

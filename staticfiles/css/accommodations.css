@@ -1,0 +1,213 @@
+.accommodations-section {
+    padding: 60px 0;
+    background: #fff;
+}
+
+.accommodations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    padding: 0 20px;
+}
+
+.expand-all-accommodations {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2c5a7b;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.expand-all-accommodations:hover {
+    background: rgba(44, 90, 123, 0.1);
+}
+
+.expand-all-accommodations i {
+    transition: transform 0.3s ease;
+}
+
+.expand-all-accommodations.expanded i {
+    transform: rotate(180deg);
+}
+
+.accommodations-items {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.accommodation-item {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.accommodation-item:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.accommodation-item-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.accommodation-item-header .item-icon {
+    width: 40px;
+    height: 40px;
+    background: #f0f7ff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.accommodation-item-header .item-icon i {
+    font-size: 18px;
+    color: #1a4b84;
+}
+
+.accommodation-item-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    flex: 1;
+}
+
+.toggle-accommodation {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.toggle-accommodation i {
+    color: #2c5a7b;
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.accommodation-item.expanded .toggle-accommodation i {
+    transform: rotate(180deg);
+}
+
+.accommodation-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.accommodation-item.expanded .accommodation-content {
+    max-height: 500px;
+}
+
+.accommodation-details {
+    padding: 0 20px 20px;
+}
+
+.accommodation-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.accommodation-description {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.view-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #1a4b84;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    background: rgba(26, 75, 132, 0.1);
+    transition: all 0.3s ease;
+}
+
+.view-more-link:hover {
+    background: rgba(26, 75, 132, 0.2);
+}
+
+.view-more-link i {
+    font-size: 12px;
+}
+
+.upgrade-note {
+    margin-top: 12px;
+    padding: 12px;
+    background: #fff3e6;
+    border-radius: 6px;
+    color: #995200;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.upgrade-note i {
+    color: #ff8c00;
+}
+
+/* Responsive Styles */
+@media (max-width: 1170px) {
+    .accommodations-header,
+    .accommodations-items {
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .accommodations-section {
+        padding: 40px 0;
+    }
+
+    .accommodations-header,
+    .accommodations-items {
+        padding: 0 16px;
+    }
+
+    .accommodation-item-header {
+        padding: 16px;
+    }
+
+    .accommodation-item-header h3 {
+        font-size: 16px;
+    }
+
+    .accommodation-description {
+        font-size: 14px;
+    }
+} 

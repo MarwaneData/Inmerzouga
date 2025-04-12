@@ -1,0 +1,603 @@
+/* Tour Page Specific Styles */
+.contact-section {
+    margin-top: 80px; /* To account for fixed navbar */
+}
+
+/* Add more tour-specific styles here as needed */ 
+
+/* Tour Header Section */
+.tour-header {
+    position: relative;
+    padding-top: 0;
+    margin-top: -20px;
+    background: #f8f9fa;
+}
+
+.tour-header-image {
+    position: relative;
+    height: 500px; /* Restored to original larger height */
+    overflow: hidden;
+}
+
+.tour-header-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tour-header-content {
+    position: relative;
+    margin-top: -200px; /* Increased overlap as requested */
+    background: white;
+    border-radius: 20px 20px 0 0;
+    padding: 40px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+/* Year Selector */
+.tour-year-selector {
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.year-label {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.year-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.year-btn {
+    padding: 8px 20px;
+    border: 2px solid #2c5a7b;
+    background: transparent;
+    color: #2c5a7b;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.year-btn.active {
+    background: #2c5a7b;
+    color: white;
+}
+
+/* Tour Title and Description */
+.tour-title {
+    font-size: 2.8rem;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.tour-description {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 900px;
+}
+
+/* Info Grid */
+.tour-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.info-block {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.info-header i {
+    font-size: 1.4rem;
+    color: #2c5a7b;
+}
+
+.info-header h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin: 0;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-list li {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+}
+
+.activity-level {
+    color: #666;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.info-icon {
+    color: #2c5a7b;
+    margin-left: 5px;
+    cursor: help;
+}
+
+.view-itinerary {
+    color: #2c5a7b;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.view-itinerary:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .tour-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tour-title {
+        font-size: 2.4rem;
+    }
+
+    .tour-header-image {
+        height: 450px;
+    }
+    
+    .tour-header-content {
+        margin-top: -150px;
+    }
+}
+
+@media (max-width: 767px) {
+    .tour-header-content {
+        padding: 25px;
+        margin-top: -100px;
+    }
+
+    .tour-title {
+        font-size: 2rem;
+    }
+
+    .tour-description {
+        font-size: 1rem;
+    }
+
+    .tour-info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .tour-header-image {
+        height: 350px;
+    }
+
+    .year-buttons {
+        flex-wrap: wrap;
+    }
+}
+
+/* Contact Section Spacing */
+.contact-section {
+    margin-top: 0;
+    background: white;
+} 
+
+/* Booking Features */
+.booking-features {
+    display: flex;
+    justify-content: flex-start;
+    gap: 60px;
+    margin: 30px 0 40px;
+    padding: 20px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.booking-features .feature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    background: #f8f9fa;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon i {
+    font-size: 1.2rem;
+    color: #2c5a7b;
+}
+
+.feature-text h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+    font-weight: 600;
+}
+
+/* Responsive adjustments for booking features */
+@media (max-width: 1024px) {
+    .booking-features {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    .booking-features {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px 0;
+    }
+} 
+
+/* Map & Itinerary Section */
+.map-itinerary {
+    padding: 60px 0;
+    background: #fff;
+}
+
+.map-content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+/* Itinerary Content Styles */
+.itinerary-content {
+    padding-right: 20px;
+}
+
+.day-item {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.day-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.day-number {
+    display: inline-block;
+    background: #2c5a7b;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.day-item h3 {
+    margin: 10px 0;
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.day-item p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Map Container Styles */
+.map-container {
+    position: relative;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 20px;
+    height: 600px;
+}
+
+.map-controls {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+}
+
+.zoom-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.zoom-btn:hover {
+    background: #2c5a7b;
+    color: white;
+}
+
+.map-wrapper {
+    width: 100%;
+    height: calc(100% - 80px);
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    cursor: move;
+}
+
+#mapImage {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform-origin: 0 0;
+    transition: transform 0.3s ease;
+}
+
+/* Map Legend */
+.map-legend {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.legend-icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-icon.start {
+    background: #2c5a7b;
+}
+
+.legend-icon.end {
+    background: #e74c3c;
+}
+
+.legend-icon.overnight {
+    background: #333;
+}
+
+.legend-icon.visited {
+    background: #666;
+    border-radius: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .map-content-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .map-container {
+        height: 500px;
+    }
+
+    .map-legend {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767px) {
+    .map-itinerary {
+        padding: 40px 0;
+    }
+
+    .map-container {
+        height: 400px;
+        padding: 15px;
+    }
+
+    .map-controls {
+        top: 20px;
+        right: 20px;
+    }
+
+    .zoom-btn {
+        width: 35px;
+        height: 35px;
+    }
+
+    .map-legend {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+} 
+
+.highlights-section {
+    padding: 60px 0;
+    background: #fff;
+}
+
+.highlights-subtitle {
+    color: #4a7140;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 32px 0 24px;
+}
+
+.highlights-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.highlight-item i {
+    color: #4a7140;
+    font-size: 24px;
+    margin-top: 4px;
+}
+
+.highlight-content {
+    flex: 1;
+}
+
+.highlight-label {
+    color: #333;
+    font-weight: 600;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+.highlight-content p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 1170px) {
+    .highlights-grid {
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 900px) {
+    .highlights-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .highlight-item {
+        gap: 12px;
+    }
+
+    .highlight-item i {
+        font-size: 20px;
+    }
+
+    .highlight-label {
+        font-size: 15px;
+    }
+
+    .highlight-content p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .highlights-section {
+        padding: 40px 0;
+    }
+
+    .highlights-subtitle {
+        font-size: 20px;
+        margin: 24px 0 20px;
+        padding: 0 16px;
+    }
+
+    .highlights-grid {
+        padding: 0 16px;
+        gap: 16px;
+    }
+
+    .highlight-content p {
+        font-size: 14px;
+    }
+} 
+
+.section-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+/* Responsive Styles */
+@media (max-width: 767px) {
+    .section-title {
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 22px;
+        margin-bottom: 14px;
+    }
+} 
+
+.accommodation-link {
+    color: #1a4b84;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.accommodation-link:hover {
+    color: #2c7bb6;
+}
+
+.accommodation-link i {
+    font-size: 12px;
+    opacity: 0.7;
+} 

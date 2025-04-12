@@ -1,0 +1,80 @@
+# Global rules for all robots
+User-agent: *
+Allow: /
+Allow: /about/
+Allow: /tour/
+Allow: /luxury-camp/
+Allow: /cities/
+Allow: /photography/
+Allow: /contact/
+Allow: /sitemap.xml
+Allow: /static/images/
+Allow: /static/css/
+Allow: /media/
+
+# Block sensitive areas
+Disallow: /admin/
+Disallow: /admin/Controle/Content-inserting-modifications
+Disallow: /private/
+Disallow: /accounts/
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /backend/
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*?*query=
+Disallow: /*?*page=
+Disallow: /*/print$
+Disallow: /*?print=*
+
+# Block specific file types
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.txt$
+Disallow: /*.yml$
+Disallow: /*.log$
+Disallow: /*.env
+Disallow: /*.md$
+Disallow: /*.sql
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Allow: /*.js
+Allow: /*.css
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# Block bad bots
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://inmerzouga.com/sitemap.xml
+Sitemap: https://inmerzouga.com/sitemap-tours.xml
+Sitemap: https://inmerzouga.com/sitemap-cities.xml
+Sitemap: https://inmerzouga.com/sitemap-camps.xml
+
+# Host preference
+Host: https://inmerzouga.com

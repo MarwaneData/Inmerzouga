@@ -1,0 +1,497 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon.png' %}">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Basic SEO -->
+    <title>{% block title %}{{ seo.meta_title }}{% endblock %}</title>
+    {% if seo.meta_description %}
+    <meta name="description" content="{{ seo.meta_description }}">
+    {% endif %}
+    {% if seo.meta_keywords %}
+    <meta name="keywords" content="{{ seo.meta_keywords }}">
+    {% endif %}
+
+    <!-- Robots Control -->
+    {% if not seo.robots_index or not seo.robots_follow %}
+    <meta name="robots" content="{% if not seo.robots_index %}no{% endif %}index,{% if not seo.robots_follow %}no{% endif %}follow">
+    {% endif %}
+
+    <!-- Canonical URL -->
+    {% if seo.canonical_url %}
+    <link rel="canonical" href="{{ seo.canonical_url }}">
+    {% endif %}
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{{ seo.og_type }}">
+    {% if seo.og_title %}
+    <meta property="og:title" content="{{ seo.og_title }}">
+    {% endif %}
+    {% if seo.og_description %}
+    <meta property="og:description" content="{{ seo.og_description }}">
+    {% endif %}
+    {% if seo.og_image %}
+    <meta property="og:image" content="{{ seo.og_image.url }}">
+    {% endif %}
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="{{ seo.twitter_card }}">
+    {% if seo.twitter_title %}
+    <meta name="twitter:title" content="{{ seo.twitter_title }}">
+    {% endif %}
+    {% if seo.twitter_description %}
+    <meta name="twitter:description" content="{{ seo.twitter_description }}">
+    {% endif %}
+    {% if seo.twitter_image %}
+    <meta name="twitter:image" content="{{ seo.twitter_image.url }}">
+    {% endif %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Add this right after the opening body tag -->
+    {% if active_promo %}
+    <div class="promo-popup" id="promoPopup">
+        <div class="promo-content">
+            <div class="promo-image">
+                <img src="{{ active_promo.image.url }}" alt="{{ active_promo.title }}">
+                <div class="promo-badge">Limited Time</div>
+            </div>
+            <div class="promo-details">
+                <h3>{{ active_promo.title }}</h3>
+                <div class="discount-text">
+                    <span class="discount">-{{ active_promo.discount }}%</span>
+                    <span class="discount-details">OFF</span>
+                </div>
+                <div class="promo-feature-list">
+                    <div class="promo-feature-item">
+                        <i class="fas fa-star promo-feature-icon"></i>
+                        <span>{{ active_promo.feature1_text }}</span>
+                    </div>
+                    <div class="promo-feature-item">
+                        <i class="fas fa-star promo-feature-icon"></i>
+                        <span>{{ active_promo.feature2_text }}</span>
+                    </div>
+                    <div class="promo-feature-item">
+                        <i class="fas fa-star promo-feature-icon"></i>
+                        <span>{{ active_promo.feature3_text }}</span>
+                    </div>
+                </div>
+                <div class="countdown" id="countdown">
+                    <i class="fas fa-clock"></i>
+                    Ends in: <span id="timer" data-end-date="{{ active_promo.end_date|date:'c' }}">23:59:59</span>
+                </div>
+                <a href="{{ active_promo.link }}" class="promo-btn">
+                    <span>Book Now</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <button class="close-promo" aria-label="Close promotion">
+                <i class="fas fa-times" ></i>
+            </button>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Replace the existing Google Translate element with this -->
+    <div id="google_translate_element"></div>
+
+    <!-- Update the language selector with icons only -->
+    <div class="language-selector">
+        <div class="lang-item" data-lang="english" onclick="doGTranslate('es|en')">
+            <img src="https://img.icons8.com/?size=100&id=aRiu1GGi6Aoe&format=png&color=000000" alt="English" class="lang-icon">
+        </div>
+        <div class="lang-item" data-lang="spanish" onclick="doGTranslate('en|es')">
+            <img src="https://img.icons8.com/?size=100&id=ly7tzANRt33n&format=png&color=000000" alt="Español" class="lang-icon">
+        </div>
+        <div class="lang-item" data-lang="italian" onclick="doGTranslate('en|it')">
+            <img src="https://img.icons8.com/?size=100&id=PW8KZnP7qXzO&format=png&color=000000" alt="Italiano" class="lang-icon">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url 'index' %}" class="navbar-brand">
+                <img src="{% static 'images/logo.png' %}" alt="Inmerzouga Logo">
+            </a>
+
+            <div class="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="{% url 'index' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">
+                            Home
+                        </a>
+                    </li>
+
+                    <!-- Tours & Trips Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">
+                            Tours & Trips
+                            <i class="fas fa-chevron-down nav-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu">
+                            <!-- Private Tours -->
+                            <div class="menu-section tours">
+                                <h4><i class="fas fa-user-group"></i> Private Tours</h4>
+                                <div class="menu-items">
+                                    {% for tour in tours %}
+                                    {% if not tour.is_group %}
+                                    <a href="{% url 'tour_detail' tour.slug %}" class="menu-item">
+                                        <i class="fas fa-route menu-icon"></i>
+                                        <span>{{ tour.short_title }}</span>
+                                    </a>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Group Tours -->
+                            <div class="menu-section tours">
+                                <h4><i class="fas fa-users"></i> Group Tours</h4>
+                                <div class="menu-items">
+                                    {% for tour in tours %}
+                                    {% if tour.is_group %}
+                                    <a href="{% url 'tour_detail' tour.slug %}" class="menu-item">
+                                        <i class="fas fa-route menu-icon"></i>
+                                        <span>{{ tour.short_title }}</span>
+                                    </a>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Day Trips -->
+                            <div class="menu-section day-trips">
+                                <h4><i class="fas fa-sun"></i> Day Trips</h4>
+                                <div class="menu-items">
+                                    {% for trip in day_trips %}
+                                    <a href="{% url 'daytrip_detail' trip.slug %}" class="menu-item">
+                                        <i class="fas fa-compass menu-icon"></i>
+                                        <span>{{ trip.title }}</span>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Activities Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">
+                            Luxury Camp
+                            <i class="fas fa-chevron-down nav-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu mega-menu activities-menu">
+                            <!-- Luxury Camps -->
+                            <div class="menu-section camps">
+                                <h4><i class="fas fa-campground"></i> Luxury Camps</h4>
+                                <div class="menu-items">
+                                    {% for camp in luxury_camps %}
+                                    <a href="{% url 'luxury_camp_detail' camp.slug %}" class="menu-item">
+                                        <i class="fas fa-moon menu-icon"></i>
+                                        <span>{{ camp.title }}</span>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Activities -->
+                            <div class="menu-section activities">
+                                <h4><i class="fas fa-hiking"></i> Desert Activities</h4>
+                                <div class="menu-items">
+                                    {% for activity in activities %}
+                                    <a href="{% url 'activities' %}" class="menu-item">
+                                        <i class="fas fa-compass menu-icon"></i>
+                                        <span>{{ activity.title }}</span>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Photography & Events -->
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">
+                            Photography & Events
+                            <i class="fas fa-chevron-down nav-arrow"></i>
+                        </a>
+                        <div class="dropdown-menu photo-menu">
+                            <!-- Photography Section -->
+                            <div class="menu-section photography">
+                                <h4><i class="fas fa-camera"></i> Photography</h4>
+                                <div class="menu-items">
+                                    <a href="{% url 'photography' %}" class="menu-item">
+                                        <i class="fas fa-image menu-icon"></i>
+                                        <span>Photography Packages</span>
+                                    </a>
+                                    <a href="{% url 'events' %}" class="menu-item">
+                                        <i class="fas fa-calendar menu-icon"></i>
+                                        <span>Events Photography</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'about' %}" class="nav-link {% if 'about' in request.path %}active{% endif %}">
+                            About
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-cta">
+                    <a href="{% url 'contact' %}" class="btn btn-outline">
+                        <i class="fas fa-envelope"></i>
+                        Contact Us
+                    </a>
+                    <a href="{% url 'book_now' %}" class="btn btn-solid">
+                        <i class="fas fa-calendar-check"></i>
+                        Book Now
+                    </a>
+                </div>
+            </div>
+
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars" style="font-size: 22px !important;"></i>
+            </button>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    {% if not hide_contact_section %}
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <p class="contact-subtitle">We'd love to hear from you. Contact us for any inquiries.</p>
+                
+                <div class="contact-grid">
+                    <!-- Contact Information -->
+                    <div class="contact-info">
+                        <div class="contact-details">
+                            {% if contact %}
+                                {% if contact.phone %}
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <div class="item-content">
+                                        <h3>Phone</h3>
+                                        <p><a href="tel:+{{ contact.phone }}" style="text-decoration: none; color: inherit;">+{{ contact.phone }}</a></p>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                {% if contact.whatsapp %}
+                                <div class="contact-item">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <div class="item-content">
+                                        <h3>WhatsApp</h3>
+                                        <p><a href="https://wa.me/{{ contact.whatsapp }}" target="_blank" style="text-decoration: none; color: inherit;">+{{ contact.whatsapp }}</a></p>
+                                    </div>
+                                </div>
+                                {% endif %}
+
+                                {% if contact.email %}
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <div class="item-content">
+                                        <h3>Email</h3>
+                                        <p><a href="mailto:{{ contact.email }}" style="text-decoration: none; color: inherit;">{{ contact.email }}</a></p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+
+                        {% if contact and contact.instagram or contact.youtube %}
+                        <div class="social-links">
+                            <h3>Follow Us</h3>
+                            <div class="social-icons">
+                                {% if contact.instagram %}
+                                <a href="{{ contact.instagram }}" target="_blank" class="social-icon">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                {% endif %}
+                                {% if contact.youtube %}
+                                <a href="{{ contact.youtube }}" target="_blank" class="social-icon">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form">
+                        <form id="contactForm" action="{% url 'contact_email' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="hear">How did you hear about us?</label>
+                                <select id="hear" name="hear" required>
+                                    <option value="">Select an option</option>
+                                    <option value="social">Social Media</option>
+                                    <option value="friend">Friend/Family</option>
+                                    <option value="search">Search Engine</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Company Info -->
+                <div class="footer-company">
+                    <img src="{% static 'images/logo.png' %}" alt="Inmerzouga Logo" class="footer-logo">
+                    <p class="company-description">Experience the magic of Morocco with our expert guides. We offer the best tours and authentic experiences.</p>
+                    {% if contact %}
+                    <div class="footer-contact">
+                        {% if contact.phone %}
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span><a href="tel:+{{ contact.phone }}" style="text-decoration: none; color: #a8b4c3;">+{{ contact.phone }}</a></span>
+                        </div>
+                        {% endif %}
+                        {% if contact.email %}
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span><a href="mailto:{{ contact.email }}" style="text-decoration: none; color: #a8b4c3;">{{ contact.email }}</a></span>
+                        </div>
+                        {% endif %}
+                        {% if contact.whatsapp %}
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <span><a href="https://wa.me/+{{ contact.whatsapp }}" target="_blank" style="text-decoration: none; color: #a8b4c3;">+{{ contact.whatsapp }}</a></span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Popular Tours -->
+                <div class="footer-tours">
+                    <h3>Popular Tours</h3>
+                    <ul>
+                        {% for tour in footer_tours %}
+                        <li>
+                            <a href="{% url 'tour_detail' tour.slug %}">
+                                {{ tour.title }}
+                                {% if tour.is_group %}
+                                <span class="tour-badge">Group</span>
+                                {% endif %}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Day Trips -->
+                <div class="footer-trips">
+                    <h3>Cities</h3>
+                    <ul>
+                        {% for city in footer_cities %}
+                        <li><a href="{% url 'city_detail' city.slug %}">{{ city.title }} Discovery</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% if contact %}
+                    <div class="footer-social">
+                        {% if contact.instagram %}
+                        <a href="{{ contact.instagram }}" target="_blank" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        {% endif %}
+                        {% if contact.youtube %}
+                        <a href="{{ contact.youtube }}" target="_blank" class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} Inmerzouga. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/promo.js' %}"></script>
+    <script src="{% static 'js/translate.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+
+    <!-- Add this just before closing body tag -->
+    {% if contact and contact.whatsapp %}
+    <a href="https://wa.me/{{ contact.whatsapp }}" target="_blank" class="floating-whatsapp">
+        <div class="whatsapp-icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+        <div class="whatsapp-text">Chat with us</div>
+    </a>
+    {% endif %}
+
+    <!-- Add this right after your <body> tag or where you want the messages to appear -->
+    {% if messages %}
+    <div class="message-container">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+            <button type="button" class="close-alert">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+</html> 

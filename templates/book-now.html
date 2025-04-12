@@ -1,0 +1,165 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/book-now.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% endblock %}
+
+{% block content %}
+    <header class="booking-hero">
+        <div class="hero-background">
+            <img src="{% static 'images/image.png' %}" alt="Desert Landscape" class="hero-img">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Book Your Moroccan Adventure</h1>
+                <p class="hero-subtitle">Start planning your unforgettable journey through Morocco's magical landscapes</p>
+            </div>
+        </div>
+    </header>
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-grid">
+                <!-- Booking Form -->
+                <div class="booking-form">
+                    <h1>Book Your Adventure</h1>
+                    <p class="form-subtitle">Fill out the form below to start your Moroccan journey</p>
+                    
+                    <form id="bookingForm" action="{% url 'booking_email' %}" method="post">
+                        {% csrf_token %}
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h3>Personal Information</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name*</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name*</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address*</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number*</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Trip Details -->
+                        <div class="form-section">
+                            <h3>Trip Details</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tourType">Tour Type*</label>
+                                    <select id="tourType" name="tourType" required>
+                                        <option value="">Select Tour Type</option>
+                                        <option value="desert">Desert Tour</option>
+                                        <option value="imperial">Imperial Cities</option>
+                                        <option value="custom">Custom Tour</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="groupSize">Group Size*</label>
+                                    <select id="groupSize" name="groupSize" required>
+                                        <option value="">Select Group Size</option>
+                                        <option value="1-2">1-2 People</option>
+                                        <option value="3-5">3-5 People</option>
+                                        <option value="6+">6+ People</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="startDate">Start Date*</label>
+                                    <input type="date" id="startDate" name="startDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="duration">Duration*</label>
+                                    <select id="duration" name="duration" required>
+                                        <option value="">Select Duration</option>
+                                        <option value="3">3 Days</option>
+                                        <option value="4">4 Days</option>
+                                        <option value="5">5 Days</option>
+                                        <option value="custom">Custom Duration</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="form-section">
+                            <h3>Additional Information</h3>
+                            <div class="form-group">
+                                <label for="requirements">Special Requirements</label>
+                                <textarea id="requirements" name="requirements" rows="4" placeholder="Tell us about any special requirements or preferences..."></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Submit Booking Request</button>
+                    </form>
+                </div>
+
+                <!-- Booking Info -->
+                <div class="booking-info">
+                    <div class="info-card">
+                        <h3>Why Book With Us?</h3>
+                        <ul class="benefits-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Expert Local Guides</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Flexible Payment Options</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>24/7 Customer Support</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <span>Customizable Itineraries</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Need Help?</h3>
+                        <div class="contact-options">
+                            <div class="contact-option">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Call Us</h4>
+                                    <p>+212 123-456-789</p>
+                                </div>
+                            </div>
+                            <div class="contact-option">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email Us</h4>
+                                    <p>booking@inmerzouga.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/scripts.js' %}"></script>
+
+{% endblock %} 

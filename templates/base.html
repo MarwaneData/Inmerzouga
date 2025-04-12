@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Inmerzouga{% endblock %}</title>
+    <!-- Common CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <img src="logo.png" alt="Inmerzouga Logo">
+            </a>
+
+            <div class="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">
+                            Tours & Day Trips
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <!-- Private Tours -->
+                            <div class="menu-item">
+                                <a href="#" class="menu-trigger">
+                                    <i class="fas fa-user"></i>
+                                    Private Tours
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                                <div class="submenu">
+                                    <a href="./tour.html">3 Days Desert Tour</a>
+                                    <a href="#">4 Days Imperial Cities</a>
+                                    <a href="#">5 Days Sahara Experience</a>
+                                </div>
+                            </div>
+                            <!-- Group Tours -->
+                            <div class="menu-item">
+                                <a href="#" class="menu-trigger">
+                                    <i class="fas fa-users"></i>
+                                    Group Tours
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                                <div class="submenu">
+                                    <a href="#">2 Days Group Desert Tour</a>
+                                    <a href="#">3 Days Group Adventure</a>
+                                    <a href="#">4 Days Cultural Tour</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link">
+                            Luxury Camp
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <!-- Accommodation -->
+                            <div class="menu-item">
+                                <a href="./luxury-camp.html" class="menu-trigger">
+                                    <i class="fas fa-bed"></i>
+                                    Luxury Camp & Tents
+                                    <i style="color: white;" class="fas fa-chevron-right"></i>
+                                </a>
+                                
+                            </div>
+                            <!-- Activities -->
+                            <div class="menu-item">
+                                <a href="./activities.html" class="menu-trigger">
+                                    <i class="fas fa-hiking"></i>
+                                    All Activities
+                                    <i style="color: white;" class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="" class="nav-link">
+                            Photography & Events
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <!-- Photography Packages -->
+                            <div class="menu-item">
+                                <a href="./photography.html" class="menu-trigger">
+                                    <i class="fas fa-camera"></i>
+                                    Photography Packages
+                                    <i style="color: white;" class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                            <!-- Events -->
+                            <div class="menu-item">
+                                <a href="#" class="menu-trigger">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    Events
+                                    <i style="color: white;" class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="about.html" class="nav-link">About</a>
+                    </li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="contact.html" class="btn btn-outline">Contact Us</a>
+                    <a href="book-now.html" class="btn btn-solid">Book Now</a>
+                </div>
+            </div>
+
+            <button class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+    <div class="menu-overlay"></div>
+
+    <!-- Main Content -->
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-company">
+                    <img src="{% static 'images/logo.png' %}" alt="Inmerzouga Logo" class="footer-logo">
+                    <p class="company-description">Experience the magic of Morocco with our expert guides.</p>
+                    <div class="footer-contact">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+212 123-456-789</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@inmerzouga.com</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer sections... -->
+            </div>
+        </div>
+    </footer>
+
+    <!-- Common JS -->
+    <script src="{% static 'js/script.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

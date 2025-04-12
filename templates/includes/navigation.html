@@ -1,0 +1,39 @@
+<nav class="navbar">
+    <!-- ... other nav items ... -->
+    <div class="dropdown">
+        <button class="dropbtn">Tours</button>
+        <div class="dropdown-content">
+            <div class="submenu">
+                <div class="submenu-column">
+                    <h3>Private Tours</h3>
+                    {% for tour in nav_private_tours %}
+                        <a href="{% url 'tour_detail' tour.slug %}">{{ tour.title }}</a>
+                    {% endfor %}
+                </div>
+                <div class="submenu-column">
+                    <h3>Group Tours</h3>
+                    {% for tour in nav_group_tours %}
+                        <a href="{% url 'tour_detail' tour.slug %}">{{ tour.title }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Luxury Camps</button>
+        <div class="dropdown-content">
+            {% for camp in nav_luxury_camps %}
+                <a href="{% url 'luxury_camp_detail' camp.slug %}">{{ camp.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button class="dropbtn">Activities</button>
+        <div class="dropdown-content">
+            <a href="{% url 'activities' %}">Desert Activities</a>
+        </div>
+    </div>
+    <!-- ... other nav items ... -->
+</nav> 

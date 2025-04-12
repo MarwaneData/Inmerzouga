@@ -1,0 +1,35 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/city.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="cities-hero">
+    <div class="container">
+        <h1>Discover Morocco's Magical Cities</h1>
+        <p>Explore the rich culture, history, and beauty of Morocco's most enchanting destinations</p>
+    </div>
+</section>
+
+<section class="cities-grid container">
+    {% for city in cities %}
+    <div class="city-card">
+        <div class="city-image">
+            <img src="{{ city.hero_image.url }}" alt="{{ city.title }}">
+        </div>
+        <div class="city-content">
+            <h3>{{ city.title }}</h3>
+            <p>{{ city.subtitle }}</p>
+            <div class="city-highlights">
+                {% for highlight in city.highlights.all|slice:":3" %}
+                <span><i class="{{ highlight.icon }}"></i> {{ highlight.title }}</span>
+                {% endfor %}
+            </div>
+            <a href="{% url 'city_detail' city.slug %}" class="btn-explore">Explore {{ city.title }}</a>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %} 

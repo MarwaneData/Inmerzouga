@@ -1,0 +1,113 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+{% block meta %}
+<meta name="description" content="{{ page.meta_description }}">
+<meta name="keywords" content="{{ page.meta_keywords }}">
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/activities.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="activities-hero">
+        <div class="activities-hero-bg">
+            <img src="{{ page.hero_image.url }}" alt="{{ page.title }}">
+        </div>
+        <div class="activities-hero-overlay"></div>
+        <div class="activities-hero-content">
+            <h1 class="activities-hero-title">{{ page.title }}</h1>
+            <p class="activities-hero-subtitle">{{ page.subtitle }}</p>
+        </div>
+    </section>
+
+    <!-- Activities Grid -->
+    <section class="activities-grid">
+        {% for activity in activities %}
+        <div class="activity-card">
+            <div class="activity-image">
+                <img src="{{ activity.image.url }}" alt="{{ activity.title }}">
+                <div class="activity-duration">
+                    <i class="fas fa-clock"></i>
+                    {{ activity.duration }}
+                </div>
+            </div>
+            <div class="activity-content">
+                <h3 class="activity-title">{{ activity.title }}</h3>
+                <p class="activity-description">{{ activity.description }}</p>
+                <div class="activity-details">
+                    <div class="detail-item">
+                        <i class="fas fa-users"></i>
+                        <div class="detail-text">
+                            <strong>Group Size</strong>
+                            {{ activity.min_group_size }}-{{ activity.max_group_size }} people
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-signal"></i>
+                        <div class="detail-text">
+                            <strong>Difficulty</strong>
+                            {{ activity.get_difficulty_display }}
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-price">
+                    €{{ activity.price }} <span>{{ activity.price_suffix }}</span>
+                </div>
+                <div class="activity-actions">
+                    <a href="{% url 'book_now' %}" class="book-activity">Book Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- Activity Modals -->
+    {% for activity in activities %}
+    <div class="activity-modal" id="modal-{{ activity.id }}">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">{{ activity.title }}</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img src="{{ activity.image.url }}" alt="{{ activity.title }}">
+                </div>
+                <div class="modal-description">
+                    <p>{{ activity.detailed_description }}</p>
+                </div>
+                <div class="modal-info">
+                    <div class="info-item">
+                        <h4><i class="fas fa-info-circle"></i> What's Included</h4>
+                        <p>{{ activity.whats_included|linebreaks }}</p>
+                    </div>
+                    <div class="info-item">
+                        <h4><i class="fas fa-clock"></i> Duration</h4>
+                        <p>{{ activity.duration }}</p>
+                    </div>
+                    <div class="info-item">
+                        <h4><i class="fas fa-map-marker-alt"></i> Meeting Point</h4>
+                        <p>{{ activity.meeting_point }}</p>
+                    </div>
+                    <div class="info-item">
+                        <h4><i class="fas fa-exclamation-circle"></i> Requirements</h4>
+                        <p>{{ activity.requirements|linebreaks }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/activities.js' %}"></script>
+{% endblock %} 

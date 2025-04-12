@@ -1,0 +1,251 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/photography-page.css' %}">
+<link rel="stylesheet" href="{% static 'css/photography.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<style>
+.gallery-item {
+    transition: all 0.3s ease-in-out;
+    opacity: 1;
+    transform: scale(1);
+    will-change: transform, opacity;
+}
+
+.gallery-filters {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.filter-btn:hover {
+    background: #f5f5f5;
+}
+
+.filter-btn.active {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="photo-hero">
+    <div class="hero-image-grid">
+        {% for image in hero_images %}
+        <div class="hero-image">
+            <img src="{{ image.image.url }}" alt="{{ image.alt_text }}">
+        </div>
+        {% endfor %}
+    </div>
+    <div class="hero-content">
+        <h1>{{ hero.title }}</h1>
+        <p>{{ hero.subtitle }}</p>
+    </div>
+</section>
+
+<!-- Photography Packages Section -->
+<section class="photography-section">
+    <div class="container">
+        <h2 class="section-title">Our Photography Packages</h2>
+        <div class="photography-grid">
+            {% for package in packages %}
+            <div class="photo-package-card">
+                <div class="package-image">
+                    {% if package.image %}
+                        <img src="{{ package.image.url }}" alt="{{ package.title }}">
+                    {% else %}
+                        <img src="{% static 'images/default-package.jpg' %}" alt="{{ package.title }}">
+                    {% endif %}
+                    <div class="package-label">{{ package.package_type }}</div>
+                </div>
+                <div class="package-content">
+                    <div class="package-title">
+                        <h3>{{ package.title }}</h3>
+                    </div>
+                    
+                    <div class="package-features">
+                        <div class="feature">
+                            <i class="fas fa-image"></i>
+                            <span>{{ package.photo_count }} Correcting Color images</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-clock"></i>
+                            <span>{{ package.editing_hours }}h Duration</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-magic"></i>
+                            <span>{{ package.retouches }} Retouches</span>
+                        </div>
+                        {% if package.digital_delivery %}
+                        <div class="feature">
+                            <i class="fas fa-cloud-download-alt"></i>
+                            <span>Digital Delivery</span>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    {% if package.title == 'Optima' or package.title == 'VIP' %}
+                    <div class="instagram-feature">
+                        <i class="fab fa-instagram"></i>
+                        <span>+ Shot video for Instagram</span>
+                    </div>
+                    {% endif %}
+
+                    <div class="package-pricing">
+                        {% if package.old_price %}
+                        <span class="old-price">€{{ package.old_price }}</span>
+                        {% endif %}
+                        <span class="current-price">€{{ package.price }}</span>
+                    </div>
+                    <a href="{% url 'book_now' %}" class="package-btn">Book Now</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+    <div class="container">
+        <h2 class="section-title">Our Photography Gallery</h2>
+        <div class="gallery-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            {% for category in categories %}
+            <button class="filter-btn" data-filter="{{ category.slug }}">{{ category.name }}</button>
+            {% endfor %}
+        </div>
+        
+        <div class="gallery-grid">
+            {% for image in gallery_images %}
+            <div class="gallery-item" data-category="{{ image.category|default:'uncategorized' }}">
+                <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                <div class="gallery-overlay">
+                    <h3>{{ image.title }}</h3>
+                    <p>{{ image.description }}</p>
+                    <span class="view-btn">View Image</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="photo-contact">
+    <div class="container">
+        <div class="contact-content">
+            <h2>Ready to Book?</h2>
+            <p>Contact us to discuss your photography needs</p>
+            <a href="{% url 'contact' %}" class="contact-btn">Contact Us</a>
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div class="lightbox-modal" id="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <div class="lightbox-caption">
+        <h3 id="lightbox-title"></h3>
+        <p id="lightbox-location"></p>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+            
+            const filterValue = btn.getAttribute('data-filter');
+            
+            // First, hide items that don't match
+            galleryItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+                if (filterValue !== 'all' && itemCategory !== filterValue) {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
+                }
+            });
+
+            // Wait for hide animation
+            setTimeout(() => {
+                galleryItems.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    if (filterValue === 'all' || itemCategory === filterValue) {
+                        item.style.display = 'block';
+                        // Force browser reflow
+                        void item.offsetWidth;
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }, 300);
+        });
+    });
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxTitle = document.getElementById('lightbox-title');
+    const lightboxLocation = document.getElementById('lightbox-location');
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = item.querySelector('img').src;
+            lightboxTitle.textContent = item.querySelector('.gallery-overlay h3').textContent;
+            lightboxLocation.textContent = item.querySelector('.gallery-overlay p').textContent;
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Close lightbox
+    document.querySelector('.close-lightbox').addEventListener('click', () => {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+});
+</script>
+{% endblock %}
+{% endblock %} 

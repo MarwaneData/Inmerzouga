@@ -1,0 +1,130 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+{% block title %}{{ city.title }} - Discover Morocco{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/city.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="city-hero">
+    <img src="{{ city.hero_image.url }}" alt="{{ city.title }}">
+    <div class="hero-content container">
+        <h1>{{ city.title }}</h1>
+        <p>{{ city.description }}</p>
+    </div>
+    <a href="#city-content" class="hero-scroll">
+        <span>Discover More</span>
+        <div class="scroll-icon"></div>
+    </a>
+</section>
+
+<!-- Content Sections -->
+{% for section in city.sections.all %}
+<section id="city-content" class="city-section {% cycle 'bg-light' '' %}">
+    <div class="container section-grid">
+        <div class="section-content {% cycle '' 'order-2' %}">
+            <h2>{{ section.title }}</h2>
+            {{ section.content|linebreaks }}
+        </div>
+        {% if section.image %}
+        <div class="section-image {% cycle 'order-2' '' %}">
+            <img src="{{ section.image.url }}" alt="{{ section.title }}">
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endfor %}
+
+<!-- Related Tours -->
+<section class="related-tours">
+    <div class="container">
+        <h2>Popular Tours & Experiences</h2>
+        <div class="tours-grid">
+            {% for tour in related_tours %}
+            <div class="tour-card">
+                <img src="{{ tour.main_image.url }}" alt="{{ tour.title }}">
+                <div class="tour-content">
+                    <h3>{{ tour.title }}</h3>
+                    <p>{{ tour.description|truncatewords:20 }}</p>
+                    <div class="tour-info">
+                        <span>
+                            <i class="fas fa-clock"></i>
+                            {{ tour.duration }} Days
+                        </span>
+                        {% if tour.cities %}
+                        <span>
+                            <i class="fas fa-map-marker-alt"></i>
+                            {{ tour.cities }} Cities
+                        </span>
+                        {% endif %}
+                        {% if tour.price %}
+                        <span>
+                            <i class="fas fa-tag"></i>
+                            From ${{ tour.price }}
+                        </span>
+                        {% endif %}
+                    </div>
+                    <a href="{% url 'tour_detail' tour.slug %}" class="btn-view">
+                        Explore Tour <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="city-gallery">
+    <div class="container">
+        <h2>Discover {{ city.title }} in Pictures</h2>
+        <div class="masonry-gallery">
+            {% for image in city.gallery_images.all %}
+            <div class="gallery-item" data-index="{{ forloop.counter0 }}">
+                <div class="gallery-image">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption }}" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="overlay-content">
+                            {% if image.caption %}
+                            <h3>{{ image.caption }}</h3>
+                            {% endif %}
+                            <span class="view-btn">
+                                <i class="fas fa-search-plus"></i>
+                                View Image
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox">
+    <div class="lightbox-wrapper">
+        <button class="lightbox-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="lightbox-arrow prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="lightbox-arrow next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="lightbox-content">
+            <img src="" alt="">
+            <div class="lightbox-caption"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/city.js' %}"></script>
+{% endblock %} 

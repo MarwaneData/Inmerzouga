@@ -1,0 +1,874 @@
+{% extends 'base-site.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+<link rel="stylesheet" href="{% static 'css/footer.css' %}">
+<link rel="stylesheet" href="{% static 'css/tour-page.css' %}">
+<link rel="stylesheet" href="{% static 'css/itinerary-new.css' %}">
+<link rel="stylesheet" href="{% static 'css/whats-included.css' %}">
+<link rel="stylesheet" href="{% static 'css/not-included.css' %}">
+<link rel="stylesheet" href="{% static 'css/prices.css' %}">
+<link rel="stylesheet" href="{% static 'css/faq.css' %}">
+<link rel="stylesheet" href="{% static 'css/customer-photos.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Tour Header Section -->
+    <section class="tour-header">
+        <div class="tour-header-image">
+            <img src="{% static 'images/image.png' %}" alt="Merzouga Desert Landscape">
+        </div>
+        
+        <div class="container">
+            <div class="tour-header-content">
+                <div class="tour-year-selector">
+                    <span class="year-label">Trip Year</span>
+                    <div class="year-buttons">
+                        <button class="year-btn active">2024</button>
+                        <button class="year-btn">2025</button>
+                    </div>
+                </div>
+
+                <h1 class="tour-title">4 Days Marrakech to Merzouga Desert Tour</h1>
+                
+                <p class="tour-description">
+                    Journey from the vibrant city of Marrakech through the Atlas Mountains to the majestic Sahara Desert. Experience authentic Berber culture, sleep under the stars in luxury desert camps, and witness breathtaking sunrises over the golden dunes of Merzouga.
+                </p>
+
+                <!-- Booking Features -->
+                <div class="booking-features">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Low deposit from $200</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Deposit protection</h4>
+                        </div>
+                    </div>
+                    
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Free booking changes</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tour-info-grid">
+                    <!-- Travel & Accommodation -->
+                    <div class="info-block">
+                        <div class="info-header">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>Travel & Accommodation</h3>
+                        </div>
+                        <ul class="info-list">
+                            <li>4 days, 1 country</li>
+                            <li>Visit 5 cities</li>
+                            <li>3 nights accommodation</li>
+                        </ul>
+                    </div>
+
+                    <!-- Meals -->
+                    <div class="info-block">
+                        <div class="info-header">
+                            <i class="fas fa-utensils"></i>
+                            <h3>Meals</h3>
+                        </div>
+                        <ul class="info-list">
+                            <li>3 Breakfasts</li>
+                            <li>4 Lunches</li>
+                            <li>3 Dinners</li>
+                        </ul>
+                    </div>
+
+                    <!-- Activity Level -->
+                    <div class="info-block">
+                        <div class="info-header">
+                            <i class="fas fa-hiking"></i>
+                            <h3>Activity Level</h3>
+                        </div>
+                        <p class="activity-level">Moderate</p>
+                        <i class="fas fa-info-circle info-icon" title="Includes desert walks, camel trekking, and moderate hiking"></i>
+                    </div>
+
+                    <!-- Itinerary -->
+                    <div class="info-block">
+                        <div class="info-header">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <h3>Itinerary</h3>
+                        </div>
+                        <a href="#day-by-day" class="view-itinerary">View day-by-day trip itinerary</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map & Itinerary Section -->
+    <section class="map-itinerary">
+        <div class="container">
+            <h2 class="section-title">Trip map & itinerary</h2>
+            
+            <div class="map-content-grid">
+                <!-- Left side - Content -->
+                <div class="itinerary-content">
+                    <div class="day-item">
+                        <span class="day-number">Day 1</span>
+                        <h3>Marrakech to Dades Valley</h3>
+                        <p>Begin your journey through the High Atlas Mountains, visit Kasbah Ait Ben Haddou, and end your day in the stunning Dades Valley.</p>
+                    </div>
+                    
+                    <div class="day-item">
+                        <span class="day-number">Day 2</span>
+                        <h3>Dades Valley to Merzouga Desert</h3>
+                        <p>Travel through Todra Gorge, visit Berber villages, and arrive at the Merzouga Desert for a camel trek to your luxury desert camp.</p>
+                    </div>
+                    
+                    <div class="day-item">
+                        <span class="day-number">Day 3</span>
+                        <h3>Merzouga Desert Experience</h3>
+                        <p>Watch the sunrise over the dunes, explore the desert by 4x4, visit nomad families, and enjoy traditional music under the stars.</p>
+                    </div>
+                    
+                    <div class="day-item">
+                        <span class="day-number">Day 4</span>
+                        <h3>Merzouga to Marrakech</h3>
+                        <p>Return to Marrakech through a different route, stopping at scenic spots and traditional markets along the way.</p>
+                    </div>
+                </div>
+                
+                <!-- Right side - Map -->
+                <div class="map-container">
+                    <div class="map-controls">
+                        <button class="zoom-btn" id="zoomIn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="zoom-btn" id="zoomOut">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button class="zoom-btn" id="fullscreen">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="map-wrapper" id="mapWrapper">
+                        <img src="{% static 'images/image.png' %}" alt="Trip Map" id="mapImage">
+                    </div>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <span class="legend-icon start"></span>
+                            <span>Start Location</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-icon end"></span>
+                            <span>End Location</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-icon overnight"></span>
+                            <span>Over night</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-icon visited"></span>
+                            <span>Visited Location</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Day by Day Itinerary Section -->
+    <section class="itinerary-section">
+        <div class="container">
+            <div class="itinerary-header">
+                <h2 class="itinerary-title">Day by day itinerary</h2>
+                <p class="itinerary-subtitle">7 days itinerary trip from Denver to Las Vegas visiting 1 country and 9 cities</p>
+                <button class="collapse-all">
+                    Collapse all days
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <div class="day-cards">
+                <!-- Day 1 -->
+                <div class="itinerary-item">
+                    <div class="item-preview">
+                        <div class="item-image">
+                            <img src="{% static 'images/image.png' %}" alt="Marrakech Medina">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-day">Day 1</div>
+                            <h3>Discover Marrakech</h3>
+                            <div class="item-location">Marrakech</div>
+                            <div class="item-welcome">
+                                <i class="fas fa-users"></i>
+                                Welcome
+                            </div>
+                        </div>
+                        <button class="item-toggle">
+                            <span>See more</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="item-expanded">
+                        <div class="expanded-content">
+                            <h3>Discover Marrakech</h3>
+                            <p class="expanded-description">
+                                Begin your Moroccan adventure in the vibrant city of Marrakech. Explore the historic Medina, a UNESCO World Heritage site, and lose yourself in the colorful souks. Visit the iconic Koutoubia Mosque and the bustling Djemaa el-Fna square, where snake charmers, storytellers, and food vendors create an unforgettable atmosphere. End your day with a traditional welcome dinner at a local riad.
+                            </p>
+                            <div class="expanded-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-bed"></i>
+                                    <div class="detail-content">
+                                        <h4>Accommodation</h4>
+                                        <p><a href="hotel-details.html" class="accommodation-link" target="_blank">Riad Palais Sebban <i class="fas fa-external-link-alt"></i></a></p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-utensils"></i>
+                                    <div class="detail-content">
+                                        <h4>Included Meals</h4>
+                                        <p>Welcome Dinner</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expanded-image">
+                            <img src="{% static 'images/image.png' %}" alt="Djemaa el-Fna Square">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 -->
+                <div class="itinerary-item">
+                    <div class="item-preview">
+                        <div class="item-image">
+                            <img src="{% static 'images/image.png' %}" alt="Atlas Mountains">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-day">Day 2</div>
+                            <h3>Atlas Mountains & Berber Villages</h3>
+                            <div class="item-location">Marrakech → Atlas Mountains → Ouarzazate</div>
+                        </div>
+                        <button class="item-toggle">
+                            <span>See more</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="item-expanded">
+                        <div class="expanded-content">
+                            <h3>Atlas Mountains & Berber Villages</h3>
+                            <p class="expanded-description">
+                                Journey through the stunning Atlas Mountains, crossing the famous Tizi n'Tichka pass at 2,260m. Visit traditional Berber villages and learn about their ancient way of life. Stop at the UNESCO World Heritage site of Ait Benhaddou, a spectacular fortified village that has served as a backdrop for numerous Hollywood films. Continue to Ouarzazate, known as the 'Hollywood of Morocco'.
+                            </p>
+                            <div class="expanded-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-bed"></i>
+                                    <div class="detail-content">
+                                        <h4>Accommodation</h4>
+                                        <p>
+                                            <a href="camp-details.html" class="accommodation-link" target="_blank">
+                                                Ksar Ighnda
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-utensils"></i>
+                                    <div class="detail-content">
+                                        <h4>Included Meals</h4>
+                                        <p>Breakfast, Traditional Berber Lunch</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expanded-image">
+                            <img src="{% static 'images/image.png' %}" alt="Ait Benhaddou">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="itinerary-item">
+                    <div class="item-preview">
+                        <div class="item-image">
+                            <img src="{% static 'images/image.png' %}" alt="Merzouga Desert">
+                        </div>
+                        <div class="item-content">
+                            <div class="item-day">Day 3</div>
+                            <h3>Sahara Desert Adventure</h3>
+                            <div class="item-location">Ouarzazate → Todra Gorge → Merzouga</div>
+                        </div>
+                        <button class="item-toggle">
+                            <span>See more</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="item-expanded">
+                        <div class="expanded-content">
+                            <h3>Sahara Desert Adventure</h3>
+                            <p class="expanded-description">
+                                Travel through the Valley of a Thousand Kasbahs to reach the impressive Todra Gorge. Marvel at the dramatic cliff walls rising up to 300m. Continue to Merzouga, gateway to the Sahara Desert. Mount your camel for a sunset trek through the golden dunes of Erg Chebbi. Spend the night in a luxury desert camp under the stars, enjoying traditional Berber music and a delicious dinner.
+                            </p>
+                            <div class="expanded-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-bed"></i>
+                                    <div class="detail-content">
+                                        <h4>Accommodation</h4>
+                                        <p>
+                                            <a href="luxury-camp.html" class="accommodation-link" target="_blank">
+                                                Luxury Desert Camp
+                                                <i class="fas fa-external-link-alt"></i>
+                                            </a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-utensils"></i>
+                                    <div class="detail-content">
+                                        <h4>Included Meals</h4>
+                                        <p>Breakfast, Dinner under the Stars</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expanded-image">
+                            <img src="{% static 'images/image.png' %}" alt="Sahara Desert Sunset">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights Section -->
+    <section class="highlights-section">
+        <div class="container">
+            <h2 class="section-title">About this trip</h2>
+            
+            <h3 class="highlights-subtitle">Sightseeing highlights</h3>
+            
+            <div class="highlights-grid">
+                <div class="highlight-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="highlight-content">
+                        <span class="highlight-label">Visit</span>
+                        <p>Marrakech Medina, Atlas Mountains, Ait Benhaddou UNESCO site, Todra Gorge, Merzouga Desert</p>
+                    </div>
+                </div>
+
+                <div class="highlight-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="highlight-content">
+                        <span class="highlight-label">Discover</span>
+                        <p>Traditional Berber villages, ancient kasbahs, and the Sahara Desert lifestyle</p>
+                    </div>
+                </div>
+
+                <div class="highlight-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="highlight-content">
+                        <span class="highlight-label">See</span>
+                        <p>Sunset over the Sahara dunes, stars in the desert sky, traditional Moroccan architecture</p>
+                    </div>
+                </div>
+
+                <div class="highlight-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="highlight-content">
+                        <span class="highlight-label">Scenic Drive</span>
+                        <p>Through the Atlas Mountains, Tizi n'Tichka pass, and Valley of a Thousand Kasbahs</p>
+                    </div>
+                </div>
+
+                <div class="highlight-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="highlight-content">
+                        <span class="highlight-label">View</span>
+                        <p>Panoramic views of the Atlas Mountains, Todra Gorge cliffs, and endless Sahara dunes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included Section -->
+    <section class="whats-included-section">
+        <div class="container">
+            <div class="included-header">
+                <h2 class="section-title">What's Included</h2>
+                <button class="expand-all-included">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="included-items">
+                <!-- Accommodation -->
+                <div class="included-item">
+                    <div class="included-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <h3>Accommodation</h3>
+                        <button class="toggle-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="included-content">
+                        <ul class="included-list">
+                            <li>1 night in authentic Moroccan Riad in Marrakech</li>
+                            <li>1 night in boutique hotel in Ouarzazate</li>
+                            <li>1 night in luxury desert camp in Merzouga</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Guide -->
+                <div class="included-item">
+                    <div class="included-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h3>Guide</h3>
+                        <button class="toggle-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="included-content">
+                        <ul class="included-list">
+                            <li>Professional English-speaking guide throughout the tour</li>
+                            <li>Local experts in historical sites</li>
+                            <li>Camel trek guide in the desert</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Meals -->
+                <div class="included-item">
+                    <div class="included-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3>Meals</h3>
+                        <div class="dietary-icons">
+                            <i class="fas fa-seedling" title="Vegetarian Options"></i>
+                            <i class="fas fa-leaf" title="Vegan Options"></i>
+                        </div>
+                        <button class="toggle-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="included-content">
+                        <ul class="included-list">
+                            <li>3 breakfasts at accommodations</li>
+                            <li>2 traditional Moroccan lunches</li>
+                            <li>3 dinners including special desert feast</li>
+                            <li>Mineral water during the journey</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Additional Services -->
+                <div class="included-item">
+                    <div class="included-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <h3>Additional Services</h3>
+                        <button class="toggle-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="included-content">
+                        <ul class="included-list">
+                            <li>All entrance fees to monuments and sites</li>
+                            <li>Camel trek in Merzouga desert</li>
+                            <li>Traditional music entertainment</li>
+                            <li>Photography stops at scenic locations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Transport -->
+                <div class="included-item">
+                    <div class="included-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3>Transport</h3>
+                        <button class="toggle-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="included-content">
+                        <ul class="included-list">
+                            <li>Modern air-conditioned 4x4 or minivan</li>
+                            <li>Airport transfers on first and last day</li>
+                            <li>Fuel and driver expenses</li>
+                            <li>Camel ride to desert camp</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Not Included Section -->
+    <section class="not-included-section">
+        <div class="container">
+            <div class="not-included-header">
+                <h2 class="section-title">What's Not Included</h2>
+                <button class="expand-all-not-included">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="not-included-items">
+                <!-- Flights -->
+                <div class="not-included-item">
+                    <div class="not-included-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <h3>Flights</h3>
+                        <button class="toggle-not-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="not-included-content">
+                        <p class="not-included-description">
+                            Flights before and after the tour are not included in the tour price. You can organize your flights separately at any point. Before you book any flights make sure to verify with the tour operator that the tour is confirmed. Meet us at the hostel and we will start from there. If you arrive a day earlier or wants to stay a day longer, let us know and we can organise the accommodation for you.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Insurance -->
+                <div class="not-included-item">
+                    <div class="not-included-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <h3>Insurance</h3>
+                        <button class="toggle-not-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="not-included-content">
+                        <p class="not-included-description">
+                            Insurance is not included. We strongly recommend getting comprehensive travel insurance that covers medical emergencies, trip cancellation, and adventure activities.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Personal Expenses -->
+                <div class="not-included-item">
+                    <div class="not-included-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-times"></i>
+                        </div>
+                        <h3>Personal Expenses</h3>
+                        <button class="toggle-not-included">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="not-included-content">
+                        <p class="not-included-description">
+                            Personal expenses such as souvenirs, additional snacks and drinks, optional activities, tips for guides and drivers, and any items of a personal nature are not included in the tour price.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- What's Included Section -->
+<section class="whats-included-section">
+    <div class="container">
+        <div class="included-header">
+            <h2 class="section-title">Extra Activities</h2>
+            <button class="expand-all-included plus">
+                Expand All
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        
+        <div class="included-items">
+            <!-- Accommodation -->
+            <div class="included-item extra">
+                <div class="included-item-header">
+                    <div class="item-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>Luxury Desert Tent</h3>
+                    <button class="toggle-included">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                <div class="included-content">
+                    <ul class="included-list">
+                        <li>Private luxury tent with en-suite bathroom</li>
+                        <li>Premium bedding and linens</li>
+                        <li>Climate control system</li>
+                        <li>Private terrace with desert views</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Activities -->
+            <div class="included-item extra">
+                <div class="included-item-header">
+                    <div class="item-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>Desert Activities</h3>
+                    <button class="toggle-included">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                <div class="included-content">
+                    <ul class="included-list">
+                        <li>Sunset camel trek</li>
+                        <li>Sandboarding experience</li>
+                        <li>Guided stargazing session</li>
+                        <li>Morning desert yoga (optional)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Prices Section -->
+    <section class="prices-section">
+        <div class="container">
+            <div class="prices-header">
+                <h2 class="section-title">Tour Prices</h2>
+                <button class="expand-all-prices">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <p class="prices-intro">
+                Since trip charges vary depending on the number of travelers, we offer different pricing options to ensure comfort and value for every group size. All prices are per person and include all mentioned services above.
+            </p>
+            
+            <div class="prices-items">
+                <!-- Solo Traveler -->
+                <div class="price-item">
+                    <div class="price-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3>Solo Traveler</h3>
+                        <div class="price-tag">1000€</div>
+                        <button class="toggle-price">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="price-content">
+                        <div class="price-details">
+                            <ul class="price-benefits">
+                                <li>Private transportation throughout the tour</li>
+                                <li>Personal guide attention</li>
+                                <li>Flexible schedule</li>
+                                <li>Single room accommodation</li>
+                            </ul>
+                            <a href="#" class="book-now-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2 Persons -->
+                <div class="price-item">
+                    <div class="price-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <h3>2 Persons</h3>
+                        <div class="price-tag">800€<span>/person</span></div>
+                        <button class="toggle-price">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="price-content">
+                        <div class="price-details">
+                            <ul class="price-benefits">
+                                <li>Shared comfortable transportation</li>
+                                <li>Dedicated guide for your couple/pair</li>
+                                <li>Double room accommodation</li>
+                                <li>20% savings compared to solo rate</li>
+                            </ul>
+                            <a href="#" class="book-now-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3-4 Persons -->
+                <div class="price-item">
+                    <div class="price-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>3-4 Persons</h3>
+                        <div class="price-tag">700€<span>/person</span></div>
+                        <button class="toggle-price">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="price-content">
+                        <div class="price-details">
+                            <ul class="price-benefits">
+                                <li>Spacious vehicle for the group</li>
+                                <li>Group discount applied</li>
+                                <li>Shared twin/double rooms</li>
+                                <li>30% savings compared to solo rate</li>
+                            </ul>
+                            <a href="#" class="book-now-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5+ Persons -->
+                <div class="price-item">
+                    <div class="price-item-header">
+                        <div class="item-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h3>5+ Persons</h3>
+                        <div class="price-tag">600€<span>/person</span></div>
+                        <button class="toggle-price">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="price-content">
+                        <div class="price-details">
+                            <ul class="price-benefits">
+                                <li>Luxury minivan transportation</li>
+                                <li>Maximum group discount</li>
+                                <li>Mix of room configurations available</li>
+                                <li>40% savings compared to solo rate</li>
+                            </ul>
+                            <a href="#" class="book-now-btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="price-notes">
+                <p><i class="fas fa-info-circle"></i> Prices are in Euros. Other currencies are accepted at the daily exchange rate.</p>
+                <p><i class="fas fa-calendar-alt"></i> High season supplement may apply during peak travel periods.</p>
+                <p><i class="fas fa-child"></i> Children under 12 years receive a 25% discount when sharing with adults.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Photos Section -->
+    <section class="customer-photos">
+        <div class="container">
+            <h2 class="section-title">Customer Photos</h2>
+            
+            <div class="photo-slider">
+                <button class="slider-nav prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="slide">
+                            <img src="{% static 'images/image.png' %}" alt="Customer Photo 1">
+                        </div>
+                        <div class="slide">
+                            <img src="{% static 'images/image.png' %}" alt="Customer Photo 2">
+                        </div>
+                        <div class="slide">
+                            <img src="{% static 'images/image.png' %}" alt="Customer Photo 3">
+                        </div>
+                        <div class="slide">
+                            <img src="{% static 'images/image.png' %}" alt="Customer Photo 4">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="slider-nav next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="section-title">Frequently asked questions</h2>
+                <button class="expand-all-faq">
+                    Expand All
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            
+            <div class="faq-items">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is a definite departure?</h3>
+                        <button class="toggle-faq">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A definite departure means that the trip is guaranteed to run on the scheduled dates. Once a tour is marked as a definite departure, you can confidently book your flights and make other travel arrangements knowing that the tour will not be cancelled.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How can I book flights for my tour? What about extra hotel nights?</h3>
+                        <button class="toggle-faq">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>While we don't book flights directly, we can assist you with flight recommendations and timing. For the best rates and flexibility, we recommend booking your flights once the tour is confirmed as a definite departure. If you need extra hotel nights before or after the tour, we can arrange this for you at preferential rates. Just let us know your requirements when booking.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How much is the deposit for a tour?</h3>
+                        <button class="toggle-faq">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To secure your booking, we require a deposit of 20% of the total tour price. This deposit is fully refundable if cancelled 60 days before departure. The remaining balance is due 30 days before the tour start date. For last-minute bookings made within 30 days of departure, full payment is required at the time of booking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/itinerary.js' %}"></script>
+<script src="{% static 'js/whats-included.js' %}"></script>
+<script src="{% static 'js/not-included.js' %}"></script>
+<script src="{% static 'js/prices.js' %}"></script>
+<script src="{% static 'js/faq.js' %}"></script>
+<script src="{% static 'js/customer-photos.js' %}"></script>
+<script src="{% static 'js/map.js' %}"></script>
+{% endblock %} 

@@ -1,0 +1,199 @@
+.whats-included-section {
+    padding: 60px 0;
+    background: #fff;
+}
+
+.included-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    max-width: 1200px;
+    margin: 0 auto 32px;
+    padding: 0 20px;
+}
+
+.expand-all-included {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2c5a7b;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.expand-all-included:hover {
+    background: rgba(44, 90, 123, 0.1);
+}
+
+.expand-all-included i {
+    transition: transform 0.3s ease;
+}
+
+.expand-all-included.expanded i {
+    transform: rotate(180deg);
+}
+
+.included-items {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.included-item {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.included-item-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.item-icon {
+    width: 40px;
+    height: 40px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-icon i {
+    font-size: 20px;
+    color: #2c5a7b;
+}
+
+.included-item-header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    flex: 1;
+}
+
+.dietary-icons {
+    display: flex;
+    gap: 8px;
+    margin-right: 16px;
+}
+
+.dietary-icons i {
+    color: #4a7140;
+    font-size: 16px;
+}
+
+.toggle-included {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+}
+
+.toggle-included i {
+    color: #2c5a7b;
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.included-item.expanded .toggle-included i {
+    transform: rotate(180deg);
+}
+
+.included-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: #f8f9fa;
+}
+
+.included-item.expanded .included-content {
+    max-height: 500px;
+}
+
+.included-list {
+    list-style: none;
+    padding: 20px;
+    margin: 0;
+}
+
+.included-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 12px;
+    color: #666;
+    font-size: 16px;
+}
+
+.included-list li:last-child {
+    margin-bottom: 0;
+}
+
+.included-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2c5a7b;
+}
+
+/* Responsive Styles */
+@media (max-width: 1170px) {
+    .included-header,
+    .included-items {
+        padding: 0 24px;
+    }
+}
+
+@media (max-width: 767px) {
+    .whats-included-section {
+        padding: 40px 0;
+    }
+
+    .included-header,
+    .included-items {
+        padding: 0 16px;
+    }
+
+    .included-item-header {
+        padding: 16px;
+    }
+
+    .item-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .item-icon i {
+        font-size: 16px;
+    }
+
+    .included-item-header h3 {
+        font-size: 16px;
+    }
+
+    .included-list {
+        padding: 16px;
+    }
+
+    .included-list li {
+        font-size: 14px;
+    }
+} 

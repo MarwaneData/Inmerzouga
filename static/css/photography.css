@@ -1,0 +1,311 @@
+.photography-section {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.photography-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.photo-package-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.photo-package-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.package-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.package-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.photo-package-card:hover .package-image img {
+    transform: scale(1.1);
+}
+
+.package-label {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #2c5a7b;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.package-label.premium {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    color: white;
+}
+
+.premium-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.premium-badge i {
+    color: #000;
+    font-size: 0.9rem;
+}
+
+.package-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.package-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.package-badge {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.package-content h3 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.package-features {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.feature-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(44, 90, 123, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-icon i {
+    color: #2c5a7b;
+    font-size: 1.2rem;
+}
+
+.feature-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-value {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.feature-label {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.package-pricing {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.price-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.old-price {
+    color: #999;
+    text-decoration: line-through;
+    font-size: 1.1rem;
+}
+
+.discount-badge {
+    background: #ff4757;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.current-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2c5a7b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.currency {
+    font-size: 1.5rem;
+    opacity: 0.8;
+}
+
+.package-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: linear-gradient(135deg, #2c5a7b 0%, #1a4b84 100%);
+    color: white;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.package-btn:hover {
+    background: linear-gradient(135deg, #1a4b84 0%, #0d3b6c 100%);
+    transform: translateY(-2px);
+}
+
+.package-btn i {
+    transition: transform 0.3s ease;
+}
+
+.package-btn:hover i {
+    transform: translateX(5px);
+}
+
+.instagram-feature {
+    margin: 20px 0;
+    padding: 15px;
+    background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+}
+
+.instagram-icon {
+    width: 45px;
+    height: 45px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.instagram-icon i {
+    font-size: 1.5rem;
+}
+
+.instagram-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.instagram-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+}
+
+.instagram-value {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .photography-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .photography-section {
+        padding: 50px 0;
+    }
+
+    .photography-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 25px;
+    }
+
+    .package-content {
+        padding: 18px;
+    }
+
+    .package-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+
+    .feature-value {
+        font-size: 1rem;
+    }
+
+    .current-price {
+        font-size: 1.4rem;
+    }
+
+    .old-price {
+        font-size: 0.9rem;
+    }
+} 
