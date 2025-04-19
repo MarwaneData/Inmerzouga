@@ -90,9 +90,10 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 15px;
 }
-
+package-content h3 {
+    margin: 0 !important;
+}
 .package-badge {
     background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
     color: white;
